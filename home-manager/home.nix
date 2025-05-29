@@ -19,6 +19,10 @@
   # environment.
   home.packages = [
     pkgs.neovim
+    pkgs.waybar
+    pkgs.fuzzel
+    pkgs.waytrogen
+    pkgs.niri
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
