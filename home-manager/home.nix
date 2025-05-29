@@ -23,6 +23,12 @@
     pkgs.fuzzel
     pkgs.waytrogen
     pkgs.niri
+    pkgs.alacritty
+    pkgs.kitty
+    pkgs.fastfetch
+    pkgs.hyfetch
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.fira-code
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -40,6 +46,8 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  fonts.fontconfig.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
