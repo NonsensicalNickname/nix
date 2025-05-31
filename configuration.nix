@@ -95,9 +95,9 @@
 		PasswordAuthentication = true;
 	};
   };
-  #programs.niri = {
-  #	enable = true;
-  #};
+  programs.niri = {
+  	enable = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
