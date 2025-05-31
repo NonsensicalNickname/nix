@@ -19,14 +19,18 @@
   # environment.
   home.packages = [
     pkgs.neovim
+
     pkgs.waybar
+    pkgs.ironbar
     pkgs.fuzzel
     pkgs.waytrogen
     pkgs.niri
     pkgs.alacritty
     pkgs.kitty
+
     pkgs.fastfetch
     pkgs.hyfetch
+
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.nerd-fonts.fira-code
     # # Adds the 'hello' command to your environment. It prints a friendly
