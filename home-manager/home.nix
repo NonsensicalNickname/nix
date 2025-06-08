@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+	imports = [
+		./modules
+	];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "ceri";
@@ -22,20 +25,24 @@
 
     pkgs.mako
     pkgs.swww
-    pkgs.ironbar
+    pkgs.waybar
     pkgs.fuzzel
     pkgs.waytrogen
-    pkgs.niri
     pkgs.alacritty
     pkgs.kitty
+    pkgs.xwayland-satellite
 
     pkgs.fastfetch
     pkgs.hyfetch
     pkgs.blahaj
     pkgs.cowsay
+    pkgs.tree
 
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.nerd-fonts.fira-code
+
+    pkgs.librewolf
+    pkgs.vesktop
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -88,7 +95,9 @@
   #  /etc/profiles/per-user/ceri/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
+    BROWSER = "librewolf";
+    TERMINAL = "kitty";
   };
 
   # Let Home Manager install and manage itself.
@@ -99,66 +108,7 @@
 	userEmail = "nonsensical_nickname@protonmail.com";
 	userName = "ceridwen15";
   };
+  
 
-  programs.fish = {
-	  enable = true;
-	  interactiveShellInit = ''
-		  function fish_greeting
-		  set noises woof arf awruff miau mrrp nya
-		  set colours trans lesbian pride
-		  cowsay -f tux $noises[(random 1 (count $noises))] | blahaj -c $colours[(random 1 (count $colours))]
-		  end
-	  '';
-	  shellInit = ''
-		  function fish_prompt
-		  set -l last_status $status
-		  set -l display_status 
-		  if test $last_status -ne 0
-			  set stat (set_color ed8796)"[$last_status]" (set_color normal)
-				  end
-
-				  set -g __fish_git_prompt_showdirtystate 1
-				  set -g __fish_git_prompt_showcolorhints 1
-				  set -g __fish_git_prompt_showupstream git
-
-				  set -g __fish_git_prompt_char_stateseparator '|'
-				  set -g __fish_git_prompt_char_cleanstate '✔'
-				  set -g __fish_git_prompt_char_dirtystate '*'
-				  set -g __fish_git_prompt_char_invalidstate '#'
-				  set -g __fish_git_prompt_char_stagedstate '+'
-				  set -g _fish_git_prompt_char_upstream_ahead '⇡'
-				  set -g __fish_git_prompt_char_upstream_behind '⇣'
-				  set -g __fish_git_prompt_char_upstream_equal '='
-
-				  set -g __fish_git_prompt_color_upstream 7dc4e4
-				  set -g __fish_git_prompt_color_prefix f5a97f
-				  set -g __fish_git_prompt_color_suffix f5a97f
-				  set -g __fish_git_prompt_color_cleanstate a6da95
-
-				  echo -s (set_color c6a0f6) (whoami) (set_color normal) "❯" (set_color f5bde6) (prompt_pwd -d 3 -D 1) $stat (fish_git_prompt "[%s]") (set_color normal) "❯ "
-				  end
-	  '';
-	  plugins = [
-	  	{ name = "done"; src = pkgs.fishPlugins.done.src; }
-	  	#{}
-	  	#{}
-	  	#{}
-	  ];
-  };
-
-
-
-################
-### GREETING ###
-################
-
-
-#alias m="math"
-#
-#alias v="nvim"
-#
-#alias wm="wikiman"
-#
-#alias lsh="ls -A -I'*'"
 
 }

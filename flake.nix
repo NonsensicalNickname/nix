@@ -1,5 +1,5 @@
 {
-	description = "System config for what currently lives in a VM";
+	description = "A NixOS system that aims to be gay";
 
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -13,6 +13,11 @@
 		system = "x86_64-linux";
 		pkgs = nixpkgs.legacyPackages.${system};
 
+		userSettings = {
+			theme = "catppuccin-macchiato";
+			font = "jetbrains-mono";
+		};
+
 		in {
 			nixosConfigurations.nix-goose = nixpkgs.lib.nixosSystem {
 				specialArgs = {inherit inputs;};
@@ -21,5 +26,7 @@
 					inputs.home-manager.nixosModules.default
 				];
 			};
+
+			#homeConfigurations.nix-goose 
 		};
 }
