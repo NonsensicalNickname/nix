@@ -1,3 +1,0 @@
-# Nix
-
-thingies for NixOS
