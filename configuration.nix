@@ -30,18 +30,43 @@
 		pulse.enable = true;
 	};
 
+	nix.settings.experimental-features = [ "nix-command" ];
+
 	users.users.ceri = {
 		isNormalUser = true;
 		extraGroups = [ "wheel" "input" "networkmanager" ];
 		packages = with pkgs; [];
 	};
+	users.defaultUserShell = pkgs.fish;
 
 	environment.systemPackages = with pkgs; [
 		vim 
+		git
 		wget
 		tree
-		git
+
+		foot
+		fuzzel
+		ironbar
+		wpaperd
+		xwayland-satellite
+		mako
+
+		librewolf
+		vesktop
+		rmpc
+
+		fishPlugins.z
+		fishPlugins.done
+		fishPlugins.autopair
+		fishPlugins.fzf-fish
+		fishPlugins.gruvbox
 	];
+
+	programs.niri.enable = true;
+
+	programs.fish.enable = true;
+	programs.command-not-found.enable = false;
 
 	services.openssh = {
 		enable = true;
@@ -49,6 +74,16 @@
 		settings = {
 			PasswordAuthentication = true;
 		};
+	};
+	services.mpd = {
+		enable = true;
+		musicDirectory = "/home/ceri/Music";
+		extraConfig = ''
+			audio_output {
+				type "pipewire"
+					name "pipe-out"
+			}
+		'';
 	};
 
 	system.stateVersion = "25.11"; 
