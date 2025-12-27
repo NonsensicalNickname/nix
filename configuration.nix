@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
-
 {
-	imports = [ ./hardware-configuration.nix ];
+	imports = [ /etc/nixos/hardware-configuration.nix ];
 
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
@@ -30,7 +29,7 @@
 		pulse.enable = true;
 	};
 
-	nix.settings.experimental-features = [ "nix-command" ];
+	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 	users.users.ceri = {
 		isNormalUser = true;
@@ -39,11 +38,23 @@
 	};
 	users.defaultUserShell = pkgs.fish;
 
+	fonts.packages = with pkgs; [
+		nerd-fonts.jetbrains-mono
+		fira-code
+		fira-code-symbols
+	];
+
 	environment.systemPackages = with pkgs; [
 		vim 
 		git
 		wget
+		fd
 		tree
+		fastfetch
+		hyfetch
+		mpc
+		tealdeer
+		bat
 
 		foot
 		fuzzel
@@ -77,15 +88,14 @@
 	};
 	services.mpd = {
 		enable = true;
-		musicDirectory = "/home/ceri/Music";
-		extraConfig = ''
-			audio_output {
-				type "pipewire"
-					name "pipe-out"
-			}
-		'';
+		settings = {
+			audio_output = [{
+				type = "pipewire";
+				name = "pipe-out";
+			}];
+			music_directory = "/home/ceri/Music";
+		};
 	};
 
 	system.stateVersion = "25.11"; 
-
 }
