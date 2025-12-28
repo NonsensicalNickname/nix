@@ -22,20 +22,18 @@
 		LC_TELEPHONE = "en_AU.UTF-8";
 		LC_TIME = "en_AU.UTF-8";
 	};
+
 	console.keyMap = "us";
 
-	services.pipewire = {
-		enable = true;
-		pulse.enable = true;
-	};
-
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+	nixpkgs.config.allowUnfree = true;
 
 	users.users.ceri = {
 		isNormalUser = true;
 		extraGroups = [ "wheel" "input" "networkmanager" ];
 		packages = with pkgs; [];
 	};
+
 	users.defaultUserShell = pkgs.fish;
 
 	fonts.packages = with pkgs; [
@@ -43,7 +41,13 @@
 		fira-code
 		fira-code-symbols
 	];
-
+	xdg.portal = {
+		enable = true;
+		xdgOpenUsePortal = true;
+		extraPortals = [
+			pkgs.xdg-desktop-portal-wlr
+		];
+	};
 	environment.systemPackages = with pkgs; [
 		vim 
 		git
@@ -86,6 +90,12 @@
 			PasswordAuthentication = true;
 		};
 	};
+
+	services.pipewire = {
+		enable = true;
+		pulse.enable = true;
+	};
+
 	services.mpd = {
 		enable = true;
 		settings = {
@@ -95,6 +105,12 @@
 			}];
 			music_directory = "/home/ceri/Music";
 		};
+	};
+
+	programs.steam = {
+		enable = true;
+		remotePlay.openFirewall = true; 
+		dedicatedServer.openFirewall = true; 
 	};
 
 	system.stateVersion = "25.11"; 
