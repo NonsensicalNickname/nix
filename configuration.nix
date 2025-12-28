@@ -41,13 +41,7 @@
 		fira-code
 		fira-code-symbols
 	];
-	xdg.portal = {
-		enable = true;
-		xdgOpenUsePortal = true;
-		extraPortals = [
-			pkgs.xdg-desktop-portal-wlr
-		];
-	};
+
 	environment.systemPackages = with pkgs; [
 		vim 
 		git
@@ -56,7 +50,6 @@
 		tree
 		fastfetch
 		hyfetch
-		mpc
 		tealdeer
 		bat
 
@@ -68,8 +61,6 @@
 		mako
 
 		librewolf
-		vesktop
-		rmpc
 
 		fishPlugins.z
 		fishPlugins.done
@@ -77,8 +68,6 @@
 		fishPlugins.fzf-fish
 		fishPlugins.gruvbox
 	];
-
-	programs.niri.enable = true;
 
 	programs.fish.enable = true;
 	programs.command-not-found.enable = false;
@@ -112,6 +101,7 @@
 		remotePlay.openFirewall = true; 
 		dedicatedServer.openFirewall = true; 
 	};
+	environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
 	system.stateVersion = "25.11"; 
 }

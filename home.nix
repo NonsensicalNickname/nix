@@ -1,4 +1,117 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
+	imports = [ inputs.niri.homeModules.niri ];
+
+	home.username = "ceri";
+	home.homeDirectory = "/home/ceri";
 	home.stateVersion = "25.11";
+
+	home.packages = with pkgs; [
+		rmpc
+		mpc
+		vesktop
+	];
+
+	programs.foot = {
+		enable = true;
+		settings = {
+			main = {
+				include = "/home/ceri/dotfiles/foot/rose-pine-moon";
+				font = "JetBrainsMono NF:size=11";
+				font-size-adjustment = "0.5";
+				initial-window-mode = "windowed";
+			};
+			cursor.style = "block";
+			cursor.blink = "no";
+			mouse.hide-when-typing = "no";
+			csd.size = "0";
+			key-bindings = {
+				clipboard-copy = "Control+Shift+c XF86Copy";
+				clipboard-paste = "Control+Shift+v XF86Paste";
+			};
+		};
+	};
+
+	programs.niri = {
+		enable = true;
+		package = pkgs.niri;
+		settings = {
+			gestures.hot-corners.enable = false;
+			prefer-no-csd = true;
+			environment.QT_QPA_PLATFORM = "wayland";
+			environment.DISPLAY = ":1";
+			input.mouse.accel-profile = "flat";
+			screenshot-path = "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S.png";
+			outputs."DP-1".mode = {
+				width = 1920;
+				height = 1080;
+				refresh = 164.955;
+			};
+			spawn-at-startup = [
+				{ sh = "ironbar"; }
+				{ sh = "wpaperd"; }
+				{ sh = "xwayland-satellite :1"; }
+				{ sh = "steam -silent"; }
+				{ sh = "mako"; }
+			];
+			layout = {
+				gaps = 6;
+				default-column-width.proportion = 0.5;
+				border = {
+					enable = true;
+					width = 3;
+					active.color = "#C4A7E7";
+					inactive.color = "#908CAA";
+					urgent.color = "#EB6F92";
+				};
+				focus-ring.enable = false;
+				shadow.enable = false;
+				center-focused-column = "never";
+			};
+			workspaces = {
+				"buffer".name = "buffer";
+				"browser".name = "browser";
+				"term".name = "term";
+				"gayming".name = "gayming";
+				"education".name = "education";
+			};
+			binds = with config.lib.niri.actions; {
+				"Mod+Q".action.spawn = "foot";
+				"Mod+Z".action.spawn = "fuzzel";
+
+				"XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
+				"XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+				"Shift+XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1+";
+				"Shift+XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1-";
+				"Shift+delete".action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@";
+
+				"Mod+Y".action.focus-workspace = "buffer";
+				"Mod+U".action.focus-workspace = "browser";
+				"Mod+I".action.focus-workspace = "term";
+				"Mod+O".action.focus-workspace = "gayming";
+				"Mod+P".action.focus-workspace = "education";
+
+				"Mod+H".action = focus-column-left;
+				"Mod+J".action = focus-window-down;
+				"Mod+K".action = focus-window-up;
+				"Mod+L".action = focus-column-right;
+
+				"Mod+Shift+H".action = move-column-left;
+				"Mod+Shift+J".action = move-window-down;
+				"Mod+Shift+K".action = move-window-up;
+				"Mod+Shift+L".action = move-column-right;
+
+				"Mod+Minus".action.set-column-width = "-10%";
+				"Mod+Equal".action.set-column-width = "+10%";
+				"Mod+Shift+Minus".action.set-window-height = "-10%";
+				"Mod+Shift+Equal".action.set-window-height = "+10%";
+				"Mod+0".action.set-column-width = "50%";
+
+				
+				"Mod+C".action = close-window;
+				"Mod+Shift+F".action = fullscreen-window;
+				"Mod+F".action = maximize-column;
+			};
+		};
+	};
 }
