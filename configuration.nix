@@ -4,6 +4,7 @@
 
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
+	boot.kernelPackages = pkgs.linuxPackages_latest;
 
 	networking.hostName = "nix-goose"; 
 	networking.networkmanager.enable = true;  
@@ -30,7 +31,7 @@
 
 	users.users.ceri = {
 		isNormalUser = true;
-		extraGroups = [ "wheel" "input" "networkmanager" ];
+		extraGroups = [ "wheel" "input" "networkmanager" "seat" ];
 		packages = with pkgs; [];
 	};
 
@@ -55,7 +56,6 @@
 
 		foot
 		fuzzel
-		ironbar
 		wpaperd
 		xwayland-satellite
 		mako
@@ -67,10 +67,36 @@
 		fishPlugins.autopair
 		fishPlugins.fzf-fish
 		fishPlugins.gruvbox
+
+		(catppuccin-sddm.override { flavor = "macchiato"; accent = "mauve"; })
 	];
 
 	programs.fish.enable = true;
 	programs.command-not-found.enable = false;
+
+	services.hardware.deepcool-digital-linux.enable = true;
+
+	services.displayManager.sessionPackages = [
+		pkgs.niri
+	];
+
+	services.displayManager.defaultSession = "niri";
+
+	services.displayManager.sddm = {
+		enable = true;
+		wayland.enable = true;
+		theme = "catppuccin-macchiato-mauve";
+	};
+	
+	security.polkit.enable = true;
+
+	xdg.portal = {
+		config.common.default = "*";
+		enable = true;
+		extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk ];
+	};
+
+	environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
 	services.openssh = {
 		enable = true;
@@ -80,8 +106,11 @@
 		};
 	};
 
+	security.rtkit.enable = true;
 	services.pipewire = {
 		enable = true;
+		alsa.enable = true;
+		alsa.support32Bit = true;
 		pulse.enable = true;
 	};
 
@@ -101,7 +130,6 @@
 		remotePlay.openFirewall = true; 
 		dedicatedServer.openFirewall = true; 
 	};
-	environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
 	system.stateVersion = "25.11"; 
 }

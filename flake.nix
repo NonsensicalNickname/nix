@@ -3,13 +3,18 @@
 
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
 		home-manager.url = "github:nix-community/home-manager";
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
 		niri.url = "github:sodiboo/niri-flake";
 		niri.inputs.nixpkgs.follows = "nixpkgs";
+
+		ironbar.url = "github:JakeStanger/ironbar";
+		ironbar.inputs.nixpkgs.follows = "nixpkgs";
 	};
 
-	outputs = { self, nixpkgs, home-manager, niri }@inputs : {
+	outputs = { self, nixpkgs, home-manager, ... }@inputs : {
 		nixosConfigurations.nix-goose = nixpkgs.lib.nixosSystem {
 			modules = [
 				./configuration.nix
