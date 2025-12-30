@@ -105,7 +105,7 @@
 				"Mod+F".action = maximize-column;
 				"Mod+R".action.spawn-sh = "ironbar reload";
 					
-				"Ctrl+Alt+Delete".action.spawn-sh = "fish -c \"set cmd (echo -e \"poweroff\nreboot\nlock\" | fuzzel -d); $cmd\"";
+				"Ctrl+Alt+Delete".action.spawn-sh = "fish /home/ceri/.config/nix/scripts/power_menu.fish";
 			};
 		};
 	};

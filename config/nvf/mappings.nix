@@ -11,7 +11,7 @@
       key = "<S-e>";
       mode = "n";
       silent = true;
-      action = ":lua vim.diagonstic.open_float()<CR>";
+      action = ":lua vim.diagnostic.open_float()<CR>";
     }
     {
       key = "<leader>t";

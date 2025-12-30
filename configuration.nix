@@ -59,19 +59,10 @@
         cargo
         gcc
 
-        foot
-        fuzzel
-        wpaperd
         xwayland-satellite
         mako
 
         librewolf
-
-        fishPlugins.z
-        fishPlugins.done
-        fishPlugins.autopair
-        fishPlugins.fzf-fish
-        fishPlugins.gruvbox
 
         (catppuccin-sddm.override { flavor = "macchiato"; accent = "mauve"; })
     ];
