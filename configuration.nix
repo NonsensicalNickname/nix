@@ -31,8 +31,7 @@
 
     users.users.ceri = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "input" "networkmanager" "seat" ];
-        packages = with pkgs; [];
+        extraGroups = [ "wheel" "input" "networkmanager" ];
     };
 
     users.defaultUserShell = pkgs.fish;
