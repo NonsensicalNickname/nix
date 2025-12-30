@@ -31,8 +31,10 @@
 
     users.users.ceri = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "input" "networkmanager" ];
+        extraGroups = [ "wheel" "input" "networkmanager" "seat" ];
     };
+
+    services.seatd.enable = true;
 
     users.defaultUserShell = pkgs.fish;
 
@@ -86,9 +88,21 @@
     security.polkit.enable = true;
 
     xdg.portal = {
-        config.common.default = "*";
+        config.common = {
+            default = [
+                "gnome"
+            ];
+            "org.freedesktop.portal.ScreenCast" = [
+                "gnome"
+            ];
+        };
+
         enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk ];
+        xdgOpenUsePortal = true;
+        extraPortals = [ 
+            pkgs.xdg-desktop-portal-gnome
+            pkgs.xdg-desktop-portal-gtk 
+        ];
     };
 
     environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];

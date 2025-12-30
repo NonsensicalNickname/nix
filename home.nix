@@ -20,12 +20,23 @@
     home.packages = with pkgs; [
         rmpc
         mpc
+        legcord
         vesktop
         cloc
     ];
 
     services.wpaperd.enable = true;
     services.wpaperd.settings.DP-1.path = "/home/ceri/Pictures/walls/rosepinesquares.png";
+
+    programs.obs-studio = {
+        enable = true;
+
+        plugins = with pkgs.obs-studio-plugins; [
+            obs-pipewire-audio-capture
+            obs-gstreamer
+            obs-livesplit-one
+        ];
+    };
 
     programs.fuzzel = {
         enable = true;
