@@ -4,6 +4,7 @@
         inputs.niri.homeModules.niri 
         inputs.ironbar.homeManagerModules.default
         inputs.nvf.homeManagerModules.default
+        inputs.sops-nix.homeManagerModules.sops
         ./config
     ];
     
@@ -20,10 +21,11 @@
     home.packages = with pkgs; [
         rmpc
         mpc
-        legcord
         vesktop
         cloc
     ];
+
+    # sops.secrets.my-password.neededForUsers = true;
 
     services.wpaperd.enable = true;
     services.wpaperd.settings.DP-1.path = "/home/ceri/Pictures/walls/rosepinesquares.png";

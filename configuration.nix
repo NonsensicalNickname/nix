@@ -54,11 +54,16 @@
         hyfetch
         tealdeer
         bat
+        wiremix
 
         rust-analyzer
         rustc
         cargo
         gcc
+        factor-lang
+        jdk17
+        # android-studio
+        # android-tools
 
         xwayland-satellite
         mako
@@ -67,6 +72,8 @@
 
         (catppuccin-sddm.override { flavor = "macchiato"; accent = "mauve"; })
     ];
+
+    # nixpkgs.config.android_sdk.accept_license = true;
 
     programs.fish.enable = true;
     programs.command-not-found.enable = false;
@@ -116,6 +123,7 @@
     };
 
     security.rtkit.enable = true;
+
     services.pipewire = {
         enable = true;
         alsa.enable = true;
@@ -132,6 +140,11 @@
             }];
             music_directory = "/home/ceri/Music";
         };
+    };
+
+    virtualisation.waydroid = {
+        enable = true;
+        package = pkgs.waydroid-nftables;
     };
 
     programs.steam = {
