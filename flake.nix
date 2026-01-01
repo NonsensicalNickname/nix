@@ -21,7 +21,7 @@
     };
 
     outputs = { self, nixpkgs, home-manager, ... }@inputs : {
-        nixosConfigurations.nix-goose = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.goose = nixpkgs.lib.nixosSystem {
             modules = [
                 ./configuration.nix
                 home-manager.nixosModules.home-manager {

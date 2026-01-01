@@ -6,7 +6,7 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    networking.hostName = "nix-goose"; 
+    networking.hostName = "goose"; 
     networking.networkmanager.enable = true;  
 
     time.timeZone = "Australia/Sydney";
@@ -153,5 +153,5 @@
         dedicatedServer.openFirewall = true; 
     };
 
-    system.stateVersion = "25.11"; 
+    system.stateVersion = "26.05"; 
 }

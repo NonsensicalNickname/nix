@@ -4,7 +4,7 @@
         enable = true;
         settings = {
             main = {
-                include = "/home/ceri/nix/themes/foot/rose-pine-moon";
+                include = "/home/ceri/.config/nix/themes/foot/rose-pine-moon";
                 font = "JetBrainsMono NF:size=11";
                 font-size-adjustment = "0.5";
                 initial-window-mode = "windowed";
