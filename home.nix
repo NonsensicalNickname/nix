@@ -19,16 +19,41 @@
     }; 
 
     home.packages = with pkgs; [
-        rmpc
         mpc
         vesktop
         cloc
+        keepassxc
+        gdu
+        mpv
+        imv
+        zathura
+        sacad
+        yazi
     ];
 
     # sops.secrets.my-password.neededForUsers = true;
 
+    programs.git = {
+        enable = true;
+        settings.user = {
+            name  = "Ceridwen";
+            email = "ceridwen@tutamail.com";
+        };
+    };
+
+    services.mpd = {
+        enable = true;
+        musicDirectory = "/home/ceri/Music";
+        extraConfig = ''
+            audio_output {
+                type "pipewire"
+                name "pipedwire"
+            }
+        '';
+    };
+
     services.wpaperd.enable = true;
-    services.wpaperd.settings.DP-1.path = "/home/ceri/Pictures/walls/rosepinesquares.png";
+    services.wpaperd.settings.DP-1.path = ./res/walls/rpm-squares.png;
 
     programs.obs-studio = {
         enable = true;

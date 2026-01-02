@@ -38,11 +38,24 @@
 
     users.defaultUserShell = pkgs.fish;
 
-    fonts.packages = with pkgs; [
-        nerd-fonts.jetbrains-mono
-        fira-code
-        fira-code-symbols
-    ];
+    fonts = {
+        packages = with pkgs; [
+            nerd-fonts.jetbrains-mono
+            fira-code
+            fira-code-symbols
+            liberation_ttf
+            paratype-pt-sans
+            paratype-pt-serif
+        ];
+
+        fontconfig = {
+            defaultFonts = {
+                serif = [  "Liberation Serif" ];
+                sansSerif = [ "Liberation Sans" ];
+                monospace = [ "JetBrainsMono NF" ];
+            };
+        };
+    };
 
     environment.systemPackages = with pkgs; [
         vim 
@@ -129,17 +142,6 @@
         alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true;
-    };
-
-    services.mpd = {
-        enable = true;
-        settings = {
-            audio_output = [{
-                type = "pipewire";
-                name = "pipe-out";
-            }];
-            music_directory = "/home/ceri/Music";
-        };
     };
 
     virtualisation.waydroid = {

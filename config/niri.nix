@@ -103,7 +103,7 @@
 				"Mod+C".action = close-window;
 				"Mod+Shift+F".action = fullscreen-window;
 				"Mod+F".action = maximize-column;
-				"Mod+R".action.spawn-sh = "ironbar reload";
+				"Mod+R".action.spawn-sh = "ironbar reload && ironbar style load-css /home/ceri/style.css";
 					
 				"Ctrl+Alt+Delete".action.spawn-sh = "fish /home/ceri/.config/nix/scripts/power_menu.fish";
 			};
