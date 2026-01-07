@@ -2,8 +2,8 @@
 {
     programs.rmpc = {
         enable = true;
-        config = ''
+        # config = ''
 
-            '';
+        #     '';
     };
 }

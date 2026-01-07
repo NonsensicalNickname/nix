@@ -4,6 +4,7 @@
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
     networking.hostName = "goose"; 
@@ -35,6 +36,7 @@
     };
 
     services.seatd.enable = true;
+    services.mpd.enable = false;
 
     users.defaultUserShell = pkgs.fish;
 
@@ -68,6 +70,10 @@
         tealdeer
         bat
         wiremix
+        btop
+        syncthing
+        nautilus
+        pinentry-curses
 
         rust-analyzer
         rustc
@@ -93,12 +99,13 @@
 
     services.hardware.deepcool-digital-linux.enable = true;
 
+    services.dbus.implementation = "broker";
+
     services.displayManager.sessionPackages = [
         pkgs.niri
     ];
 
     services.displayManager.defaultSession = "niri";
-
     services.displayManager.sddm = {
         enable = true;
         wayland.enable = true;
@@ -149,11 +156,18 @@
         package = pkgs.waydroid-nftables;
     };
 
+    services.pcscd.enable = true;
+    programs.gnupg.agent = {
+       enable = true;
+       pinentryPackage = pkgs.pinentry-curses;
+       enableSSHSupport = true;
+    };
+
     programs.steam = {
         enable = true;
         remotePlay.openFirewall = true; 
         dedicatedServer.openFirewall = true; 
     };
 
-    system.stateVersion = "26.05"; 
+    system.stateVersion = "25.11"; 
 }

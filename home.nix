@@ -10,7 +10,7 @@
     
     home.username = "ceri";
     home.homeDirectory = "/home/ceri";
-    home.stateVersion = "26.05";
+    home.stateVersion = "25.11";
 
     home.sessionVariables = {
         EDITOR = "nvim";
@@ -20,7 +20,8 @@
 
     home.packages = with pkgs; [
         mpc
-        vesktop
+        nicotine-plus
+        legcord
         cloc
         keepassxc
         gdu
@@ -29,21 +30,28 @@
         zathura
         sacad
         yazi
+        parsec-bin
+        yt-dlp
+        tageditor
     ];
 
     # sops.secrets.my-password.neededForUsers = true;
 
     programs.git = {
         enable = true;
-        settings.user = {
-            name  = "Ceridwen";
-            email = "ceridwen@tutamail.com";
+        settings = {
+            user = {
+                name  = "ceridwen15";
+                email = "ceridwen@tutamail.com";
+                signingkey = "41E1454BBAD931DA";
+            };
+            commit.gpgsign = true;
         };
     };
 
     services.mpd = {
         enable = true;
-        musicDirectory = "/home/ceri/Music";
+        musicDirectory = "/home/ceri/Music/";
         extraConfig = ''
             audio_output {
                 type "pipewire"
