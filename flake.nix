@@ -3,7 +3,6 @@
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-        # nixpkgs.url = "github:nixos/nixpkgs?ref=cad22e7d996aea55ecab064e84834289143e44a0";
 
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -17,12 +16,19 @@
         nvf.url = "github:NotAShelf/nvf";
         nvf.inputs.nixpkgs.follows = "nixpkgs";
 
+        # nix-ld.url = "github:Mic92/nix-ld";
+        # nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+
+        fenix.url = "github:nix-community/fenix";
+        fenix.inputs.nixpkgs.follows = "nixpkgs";
+
         sops-nix.url = "github:Mic92/sops-nix";
         sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { self, nixpkgs, home-manager, ... }@inputs : {
+    outputs = { self, nixpkgs, home-manager, fenix, ... }@inputs : {
         nixosConfigurations.goose = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
             modules = [
                 ./configuration.nix
                 home-manager.nixosModules.home-manager {
@@ -33,6 +39,20 @@
                         users.ceri = ./home.nix; 
                     };
                 }
+                # nix-ld.nixosModules.nix-ld
+                ({ pkgs, ... }: {
+                    nixpkgs.overlays = [ fenix.overlays.default ];
+                    environment.systemPackages = [
+                        (pkgs.fenix.complete.withComponents [
+                            "cargo"
+                            "clippy"
+                            "rust-src"
+                            "rustc"
+                            "rustfmt"
+                        ])
+                        pkgs.rust-analyzer
+                    ];
+                })
             ];
         };
     };

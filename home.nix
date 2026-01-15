@@ -1,12 +1,11 @@
 { config, pkgs, inputs, ... }:
 {
-    imports = [ 
-        inputs.niri.homeModules.niri 
-        inputs.ironbar.homeManagerModules.default
-        inputs.nvf.homeManagerModules.default
-        inputs.sops-nix.homeManagerModules.sops
-        ./config
-    ];
+    imports = with inputs; [ 
+        niri.homeModules.niri 
+        ironbar.homeManagerModules.default
+        nvf.homeManagerModules.default
+        sops-nix.homeManagerModules.sops
+    ] ++ [ ./config ];
     
     home.username = "ceri";
     home.homeDirectory = "/home/ceri";
@@ -19,6 +18,7 @@
     }; 
 
     home.packages = with pkgs; [
+        blahaj
         mpc
         nicotine-plus
         legcord
@@ -35,6 +35,14 @@
         tageditor
     ];
 
+    programs.vscode = {
+        enable = true;
+        package = pkgs.vscodium-fhs;
+        profiles.default.extensions = with pkgs.vscode-extensions; [
+            vscjava.vscode-java-pack
+            vscodevim.vim
+        ];
+    };
     # sops.secrets.my-password.neededForUsers = true;
 
     programs.git = {

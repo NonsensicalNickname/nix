@@ -1,8 +1,8 @@
 { pkgs, config, ... }:
 {
-	# TODO
+	# TODO:
 	# windowrules
-	# screenshot
+    # volume popup thingy perhaps
 
 	programs.niri = {
 		enable = true;
