@@ -31,4 +31,16 @@
                 '';
         };
     };
+
+    programs.nvf.settings.vim.startPlugins = [
+        (pkgs.vimUtils.buildVimPlugin {
+            name = "vim-umka";
+            src = pkgs.fetchFromGitHub {
+                owner = "marekmaskarinec";
+                repo = "vim-umka";
+                rev = "8872f9f8b82f2e91e40c48174f6af85cbb36aa87";
+                hash = "sha256-P0w5cXWxAV+nXKiRVBOnixeB0j4IUqPMxLb7GlH2dNY=";
+            };
+        })
+    ];
 }

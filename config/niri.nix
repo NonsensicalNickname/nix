@@ -97,6 +97,8 @@
 				"F12".action.screenshot = { show-pointer = false; };
 				"Ctrl+F12".action.screenshot-screen = { show-pointer = false; };
 
+                "F10".action.spawn-sh = "hyprpicker | wl-copy";
+
 				"Mod+Shift+D".action.spawn-sh = "makoctl dismiss";
 				"Mod+D".action.spawn-sh = "vesktop && niri msg focus-workspace gayming";
 				

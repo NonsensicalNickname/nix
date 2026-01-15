@@ -16,9 +16,6 @@
         nvf.url = "github:NotAShelf/nvf";
         nvf.inputs.nixpkgs.follows = "nixpkgs";
 
-        # nix-ld.url = "github:Mic92/nix-ld";
-        # nix-ld.inputs.nixpkgs.follows = "nixpkgs";
-
         fenix.url = "github:nix-community/fenix";
         fenix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -39,7 +36,6 @@
                         users.ceri = ./home.nix; 
                     };
                 }
-                # nix-ld.nixosModules.nix-ld
                 ({ pkgs, ... }: {
                     nixpkgs.overlays = [ fenix.overlays.default ];
                     environment.systemPackages = [

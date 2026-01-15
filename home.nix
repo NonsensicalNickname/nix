@@ -18,6 +18,7 @@
     }; 
 
     home.packages = with pkgs; [
+        hyprpicker
         blahaj
         mpc
         nicotine-plus
@@ -33,6 +34,8 @@
         parsec-bin
         yt-dlp
         tageditor
+        r2modman
+        python3
     ];
 
     programs.vscode = {

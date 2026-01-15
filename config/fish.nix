@@ -13,6 +13,8 @@
             nfu="sudo nix flake update";
             nup="nfu; nrs";
             nsc="sudo nix-collect-garbage && sudo nix-collect-garbage -d";
+            # replace with a not-shit solution
+            # umka="/home/ceri/umka/umka";
         };
 
         plugins = [

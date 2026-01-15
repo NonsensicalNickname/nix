@@ -68,6 +68,8 @@
         wget
         fd
         tree
+        wl-clipboard
+        unzip
         fastfetch
         hyfetch
         tealdeer
@@ -91,23 +93,6 @@
 
         (catppuccin-sddm.override { flavor = "macchiato"; accent = "mauve"; })
     ];
-
-    # nixpkgs.overlays = [ 
-    #      (
-    #          final: prev: 
-    #          {
-    #              gforth = prev.gforth.overrideAttrs (old: {
-    #                  patches = (old.patches or []) ++ [
-    #                      # (prev.fetchpatch {
-    #                      #     url = "https://github.com/NixOS/nixpkgs/commit/4204cb57715b8d505403656523bbcee8af6e6162.patch";
-    #                      #     hash = "4204cb57715b8d505403656523bbcee8af6e6162";
-    #                      # })
-    #                      ./patches/4204cb57715b8d505403656523bbcee8af6e6162.patch
-    #                  ];
-    #              });
-    #          }
-    #      )
-    #  ];
 
     # nixpkgs.config.android_sdk.accept_license = true;
 
