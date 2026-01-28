@@ -83,8 +83,6 @@
         gcc
         factor-lang
         jdk17
-        # android-studio
-        # android-tools
 
         xwayland-satellite
         mako
@@ -93,8 +91,6 @@
 
         (catppuccin-sddm.override { flavor = "macchiato"; accent = "mauve"; })
     ];
-
-    # nixpkgs.config.android_sdk.accept_license = true;
 
     programs.fish.enable = true;
     programs.command-not-found.enable = false;

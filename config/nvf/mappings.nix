@@ -8,6 +8,12 @@
       action = ":noh<CR>";
     }
     {
+      key = "<C-k>";
+      mode = "n";
+      silent = true;
+      action = "<C-]>";
+    }
+    {
       key = "<S-e>";
       mode = "n";
       silent = true;
@@ -24,6 +30,12 @@
       mode = "n";
       silent = true;
       action = ":Checkbox<CR>";
+    }
+    {
+      key = "<S-m>";
+      mode = "n";
+      silent = true;
+      action = ":RustLsp expandMacro<CR>";
     }
     {
       key = "<leader>]";

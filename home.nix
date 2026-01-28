@@ -18,6 +18,7 @@
     }; 
 
     home.packages = with pkgs; [
+        ascii
         hyprpicker
         blahaj
         mpc
@@ -29,13 +30,20 @@
         mpv
         imv
         zathura
-        sacad
         yazi
         parsec-bin
         yt-dlp
         tageditor
         r2modman
         python3
+        hyperfine
+        valgrind
+        gdb
+        gnumake
+        cmake
+        mlton
+        firefox-bin
+        # gforth
     ];
 
     programs.vscode = {

@@ -30,6 +30,12 @@
                 }
                 '';
         };
+        cord = {
+            package = pkgs.vimPlugins.cord-nvim;
+        };
+        rustaceanvim = {
+            package = pkgs.vimPlugins.rustaceanvim;
+        };
     };
 
     programs.nvf.settings.vim.startPlugins = [
