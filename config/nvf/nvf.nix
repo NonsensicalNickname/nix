@@ -45,6 +45,8 @@
             python.enable = true;
             assembly.enable = true;
             markdown.enable = true;
+            # haskell.enable = true;
+            # haskell.lsp.servers = [ "hls" ];
         };
     };
 }

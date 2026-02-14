@@ -79,13 +79,34 @@
         syncthing
         nautilus
         pinentry-curses
+        ascii 
+        file
+        cloc 
+        mpv 
+        imv 
+        zathura 
+        yt-dlp
+        libnotify
+        usbutils
+        pciutils
+
+        net-tools
+        inetutils
 
         gcc
         factor-lang
         jdk17
+        python3
+        mlton
+        ghc
+        haskellPackages.hoogle
+        haskell-language-server
+        # stack
+        gforth
 
         xwayland-satellite
-        mako
+        jq
+        drawterm-wayland
 
         librewolf
 

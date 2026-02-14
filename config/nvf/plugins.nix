@@ -36,6 +36,9 @@
         rustaceanvim = {
             package = pkgs.vimPlugins.rustaceanvim;
         };
+        haskell-tools = {
+            package = pkgs.vimPlugins.haskell-tools-nvim;
+        };
     };
 
     programs.nvf.settings.vim.startPlugins = [

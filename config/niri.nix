@@ -29,7 +29,7 @@
 				{ sh = "wpaperd"; }
 				{ sh = "xwayland-satellite :1"; }
 				{ sh = "steam -silent"; }
-				{ sh = "mako"; }
+                { sh = "mprisence"; }
 			];
 
 			layout = {
@@ -100,7 +100,7 @@
                 "F10".action.spawn-sh = "hyprpicker | wl-copy";
 
 				"Mod+Shift+D".action.spawn-sh = "makoctl dismiss";
-				"Mod+D".action.spawn-sh = "vesktop && niri msg focus-workspace gayming";
+				"Mod+D".action.spawn-sh = "fish /home/ceri/.config/nix/scripts/define.fish";
 				
 				"Mod+C".action = close-window;
 				"Mod+Shift+F".action = fullscreen-window;

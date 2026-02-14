@@ -9,6 +9,7 @@
         shellAliases = {
             v="nvim";
             m="math";
+
             nrs="sudo nixos-rebuild switch --flake . --impure";
             nfu="sudo nix flake update";
             nup="nfu; nrs";
