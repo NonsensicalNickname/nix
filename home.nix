@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, user, ... }:
+{ config, pkgs, inputs, user, stdenv, lib, ... }:
 {
     imports = with inputs; [ 
         niri.homeModules.niri 
@@ -25,7 +25,7 @@
         hyprpicker
         file
         mpris-scrobbler
-        mprisence
+        # mprisence
         music-discord-rpc
 
         # GUI apps
@@ -52,6 +52,31 @@
         cmake
 
         (mpv.override {scripts = [mpvScripts.mpris];})
+        (mprisence.override {
+            rustPlatform.buildRustPackage = (
+                oldAttrsGen:
+                rustPlatform.buildRustPackage (
+                    let
+                        fs = lib.fileset;
+                        sourceFiles = /home/ceri/Projects/rs/mprisence/.;
+                        oldAttrs = (oldAttrsGen finalAttrs);
+                    in
+                        oldAttrs
+                    // {
+                        src = fs.toSource {
+                            root = /home/ceri/Projects/rs/mprisence/.;
+                            fileset = sourceFiles;
+                        };
+                        pname = "mprisence";
+                        cargoHash = "sha256-xWd99ZGAH/7hzXSZP5NRTGjON7kPE+TrYVZ2mrfRhzc=";
+                        nativeBuildInputs = [ pkg-config ];
+                        buildInputs = [
+                            dbus
+                            openssl
+                        ];
+                    }
+                )
+            );})
     ];
 
     services.mako = {
