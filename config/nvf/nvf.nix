@@ -41,10 +41,12 @@
             nix.enable = true;
             nix.lsp.servers = [ "nixd" ];
             clang.enable = true;
-            rust.enable = true;
+            # rust.enable = true;
             python.enable = true;
             assembly.enable = true;
             markdown.enable = true;
+            typst.enable = true;
+            typst.lsp.servers = [ "tinymist" ];
             # haskell.enable = true;
             # haskell.lsp.servers = [ "hls" ];
         };

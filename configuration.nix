@@ -51,6 +51,7 @@
             liberation_ttf
             paratype-pt-sans
             paratype-pt-serif
+            font-awesome_7
         ];
 
         fontconfig = {
@@ -89,6 +90,7 @@
         libnotify
         usbutils
         pciutils
+        lm_sensors
 
         net-tools
         inetutils

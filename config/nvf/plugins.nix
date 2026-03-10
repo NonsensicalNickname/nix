@@ -17,6 +17,23 @@
         surround.enable = true;
     };
 
+
+    programs.nvf.settings.vim.lazy.enable = true;
+    programs.nvf.settings.vim.lazy.plugins.rustaceanvim = {
+        ft = "rust";
+        package = pkgs.vimPlugins.rustaceanvim;
+        after = ''
+            vim.keymap.set(
+              "n",
+              "K", 
+              function()
+                vim.cmd.RustLsp({'hover', 'actions'})
+              end,
+              { silent = true, buffer = bufnr }
+            )
+        '';
+    };
+
     programs.nvf.settings.vim.extraPlugins = {
         mini-tabline = {
             package = pkgs.vimPlugins.mini-tabline;
@@ -28,16 +45,23 @@
                     return buf_id .. MiniTabline.default_format(buf_id, label)
                     end,
                 }
-                '';
+            '';
         };
         cord = {
             package = pkgs.vimPlugins.cord-nvim;
         };
-        rustaceanvim = {
-            package = pkgs.vimPlugins.rustaceanvim;
-        };
         haskell-tools = {
             package = pkgs.vimPlugins.haskell-tools-nvim;
+        };
+        typst-preview = {
+            package = pkgs.vimPlugins.typst-preview-nvim;
+            setup = ''
+                require("typst-preview").setup {
+                    open_cmd = 'librewolf --new-window %s',
+                    host = '127.0.0.1',
+                    port = 0,
+                }
+            '';
         };
     };
 

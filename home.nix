@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, user, stdenv, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 {
     imports = with inputs; [ 
         niri.homeModules.niri 
@@ -26,7 +26,6 @@
         file
         mpris-scrobbler
         # mprisence
-        music-discord-rpc
 
         # GUI apps
         fluffychat
@@ -44,6 +43,9 @@
         gdu
         yazi
         tiny
+
+        typst
+        typstwriter
 
         # PL tools
         valgrind
