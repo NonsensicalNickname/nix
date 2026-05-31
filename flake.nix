@@ -4,7 +4,7 @@
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-        home-manager.url = "github:nix-community/home-manager";
+        home-manager.url = "github:nix-community/home-manager?ref=release-26.05";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
         niri.url = "github:sodiboo/niri-flake";
@@ -46,7 +46,7 @@
                             "rustc"
                             "rustfmt"
                         ])
-                        pkgs.rust-analyzer-nightly
+                        #pkgs.rust-analyzer-nightly
                     ];
                 })
             ];

@@ -2,7 +2,6 @@
 {
     programs.nvf.settings.vim.mini = {
         pairs.enable = true;
-        align.enable = true;
         comment.enable = true;
         bracketed.enable = true;
         files.enable = true;
@@ -19,6 +18,7 @@
 
 
     programs.nvf.settings.vim.lazy.enable = true;
+
     programs.nvf.settings.vim.lazy.plugins.rustaceanvim = {
         ft = "rust";
         package = pkgs.vimPlugins.rustaceanvim;
@@ -31,6 +31,25 @@
               end,
               { silent = true, buffer = bufnr }
             )
+            vim.keymap.set(
+              "n",
+              "E", 
+              function()
+                vim.cmd.RustLsp({ 'renderDiagnostic', 'current' })
+              end,
+              { silent = true, buffer = bufnr }
+            )
+        '';
+    };
+
+    programs.nvf.settings.vim.lazy.plugins."haskell-tools.nvim" = {
+        ft = "haskell";
+        package = pkgs.vimPlugins.haskell-tools-nvim;
+        after = ''
+            local ht = require('haskell-tools')
+            local bufnr = vim.api.nvim_get_current_buf()
+            local opts = { noremap = true, silent = true, buffer = bufnr, }
+            vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
         '';
     };
 
@@ -47,12 +66,11 @@
                 }
             '';
         };
-        cord = {
-            package = pkgs.vimPlugins.cord-nvim;
-        };
-        haskell-tools = {
-            package = pkgs.vimPlugins.haskell-tools-nvim;
-        };
+
+        # cord = {
+        #     package = pkgs.vimPlugins.cord-nvim;
+        # };
+
         typst-preview = {
             package = pkgs.vimPlugins.typst-preview-nvim;
             setup = ''

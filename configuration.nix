@@ -8,7 +8,7 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_6_6;
 
     networking.hostName = "goose"; 
     networking.networkmanager.enable = true;  
@@ -33,10 +33,20 @@
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     nixpkgs.config.allowUnfree = true;
 
-    users.users.ceri = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" "input" "networkmanager" "seat" ];
+    users.users = {
+        ceri = {
+            isNormalUser = true;
+            extraGroups = [ "wheel" "input" "networkmanager" "seat" ];
+        };
+
+        postgres = {
+            isSystemUser = true;
+            createHome = false;
+            group = "postgres";
+        };
     };
+
+    users.groups.postgres = {};
 
     services.seatd.enable = true;
     services.mpd.enable = false;
@@ -68,6 +78,7 @@
         git
         wget
         fd
+        psmisc
         tree
         wl-clipboard
         unzip
@@ -91,6 +102,7 @@
         usbutils
         pciutils
         lm_sensors
+        brightnessctl
 
         net-tools
         inetutils
@@ -130,6 +142,8 @@
     services.displayManager.sddm = {
         enable = true;
         wayland.enable = true;
+        wayland.compositor = "weston";
+        #wayland.compositorCommand = "";
         theme = "catppuccin-macchiato-mauve";
     };
 
@@ -163,6 +177,7 @@
         };
     };
 
+    services.resolved.enable = true;
     security.rtkit.enable = true;
 
     services.pipewire = {
@@ -189,6 +204,8 @@
         remotePlay.openFirewall = true; 
         dedicatedServer.openFirewall = true; 
     };
+
+    networking.firewall.enable = false;
 
     system.stateVersion = "25.11"; 
 }

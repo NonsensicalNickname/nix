@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
     # TODO 
+    # FIX RUST INDENTATION BALLS
     # mini-snippets
     # fzf stuff
     # more language suppport
@@ -17,6 +18,10 @@
             smartindent = true;
             foldmethod = "manual";
         };
+
+        telescope.enable = true;
+
+        # visuals.indent-blankline.enable = true;
 
         globals.mapleader = "\\";
         globals.maplocalleader = ",";
@@ -41,14 +46,13 @@
             nix.enable = true;
             nix.lsp.servers = [ "nixd" ];
             clang.enable = true;
-            # rust.enable = true;
+            glsl.enable = true;
             python.enable = true;
             assembly.enable = true;
             markdown.enable = true;
             typst.enable = true;
             typst.lsp.servers = [ "tinymist" ];
-            # haskell.enable = true;
-            # haskell.lsp.servers = [ "hls" ];
+            rust.enable = true;
         };
     };
 }

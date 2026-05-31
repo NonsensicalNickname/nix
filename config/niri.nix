@@ -60,8 +60,8 @@
 				"Mod+Z".action.spawn = "fuzzel";
 				"Mod+B".action.spawn = "librewolf";
 
-				"XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
-				"XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+				"XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+";
+				"XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-";
 				"Shift+XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1+";
 				"Shift+XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1-";
 				"Shift+delete".action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@";
@@ -99,7 +99,7 @@
 
                 "F10".action.spawn-sh = "hyprpicker | wl-copy";
 
-				"Mod+Shift+D".action.spawn-sh = "makoctl dismiss";
+				"F4".action.spawn-sh = "makoctl dismiss";
 				"Mod+D".action.spawn-sh = "fish /home/ceri/.config/nix/scripts/define.fish";
 				
 				"Mod+C".action = close-window;

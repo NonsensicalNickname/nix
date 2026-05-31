@@ -8,5 +8,6 @@
 - Other desktop: Ironbar, Fuzzel, SDDM
 
 ## TODO / incomplete
-- Stylix / switching colours
-- Device / profile based values in config
+- manage widely used colourscheme myself bc stylix fucked fonts and seems like overdoing it
+- device / profile based values in config (alongside the above)
+- haskell it up

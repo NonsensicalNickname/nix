@@ -19,7 +19,13 @@
 
     home.packages = with pkgs; [
         # CLI utils
+        hyperfine
+        flac
+        wakatime-cli
+        ffmpeg
         blahaj 
+        nmap
+        fzf
         cowsay
         mpc 
         hyprpicker
@@ -28,6 +34,19 @@
         # mprisence
 
         # GUI apps
+        quake3e
+        owmods-cli
+        chromium
+        praat
+        qmk
+        qmk-udev-rules
+        vial
+        heroic
+        qutebrowser
+        krita
+        prismlauncher
+        gale
+        pwvucontrol
         fluffychat
         nicotine-plus
         legcord
@@ -37,8 +56,10 @@
         tageditor
         parsec-bin 
         firefox-bin
+        schismtracker
 
         # TUI apps
+        bulletty
         wikiman
         gdu
         yazi
@@ -52,6 +73,7 @@
         gdb
         gnumake
         cmake
+        glslviewer
 
         (mpv.override {scripts = [mpvScripts.mpris];})
         (mprisence.override {

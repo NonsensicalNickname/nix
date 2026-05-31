@@ -14,6 +14,12 @@
             nfu="sudo nix flake update";
             nup="nfu; nrs";
             nsc="sudo nix-collect-garbage && sudo nix-collect-garbage -d";
+
+            stopwatch= ''
+                while true
+                 printf '%s\r' "$(date)" 
+                end
+            '';
             # replace with a not-shit solution
             # umka="/home/ceri/umka/umka";
         };
