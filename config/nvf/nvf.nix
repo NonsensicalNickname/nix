@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
     # TODO 
-    # FIX RUST INDENTATION BALLS
     # mini-snippets
     # fzf stuff
     # more language suppport
@@ -18,10 +17,6 @@
             smartindent = true;
             foldmethod = "manual";
         };
-
-        telescope.enable = true;
-
-        # visuals.indent-blankline.enable = true;
 
         globals.mapleader = "\\";
         globals.maplocalleader = ",";

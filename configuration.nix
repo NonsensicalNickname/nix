@@ -8,7 +8,7 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    boot.kernelPackages = pkgs.linuxPackages_6_6;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
     networking.hostName = "goose"; 
     networking.networkmanager.enable = true;  
@@ -36,7 +36,7 @@
     users.users = {
         ceri = {
             isNormalUser = true;
-            extraGroups = [ "wheel" "input" "networkmanager" "seat" ];
+            extraGroups = [ "wheel" "input" "networkmanager" ]; 
         };
 
         postgres = {
@@ -48,7 +48,6 @@
 
     users.groups.postgres = {};
 
-    services.seatd.enable = true;
     services.mpd.enable = false;
 
     users.defaultUserShell = pkgs.fish;
@@ -72,6 +71,13 @@
             };
         };
     };
+
+    nixpkgs.config.permittedInsecurePackages = [
+        "librewolf-bin-151.0.1-2"
+        "pnpm-10.29.2"
+        "librewolf-bin-unwrapped-151.0.1-2"
+        #"librewolf-unwrapped-151.0.2-1"
+    ];
 
     environment.systemPackages = with pkgs; [
         vim 
@@ -122,7 +128,7 @@
         jq
         drawterm-wayland
 
-        librewolf
+        librewolf-bin
 
         (catppuccin-sddm.override { flavor = "macchiato"; accent = "mauve"; })
     ];
@@ -148,6 +154,7 @@
     };
 
     security.polkit.enable = true;
+    security.soteria.enable = true;
 
     xdg.portal = {
         config.common = {
@@ -191,6 +198,11 @@
         enable = true;
         package = pkgs.waydroid-nftables;
     };
+
+    virtualisation.virtualbox.host.enable = true;
+    virtualisation.virtualbox.host.enableKvm = true;
+    virtualisation.virtualbox.host.addNetworkInterface = false;
+    users.extraGroups.vboxusers.members = [ "ceri" ];
 
     services.pcscd.enable = true;
     programs.gnupg.agent = {

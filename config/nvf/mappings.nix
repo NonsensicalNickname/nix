@@ -26,34 +26,22 @@
             action = ":lua vim.diagnostic.open_float()<CR>";
         }
         {
+            key = "<S-t>";
+            mode = "n";
+            silent = true;
+            action = ":Telescope<CR>";
+        }
+        {
             key = "<leader>t";
             mode = "n";
             silent = true;
             action = ":lua MiniFiles.open()<CR>";
         }
         {
-            key = "<leader>o";
-            mode = "n";
-            silent = true;
-            action = ":Checkbox<CR>";
-        }
-        {
             key = "<S-m>";
             mode = "n";
             silent = true;
             action = ":RustLsp expandMacro<CR>";
-        }
-        {
-            key = "<leader>]";
-            mode = "n";
-            silent = true;
-            action = ":Heading increase<CR>";
-        }
-        {
-            key = "<leader>[";
-            mode = "n";
-            silent = true;
-            action = ":Heading decrease<CR>";
         }
         {
             key = "<A-]>";

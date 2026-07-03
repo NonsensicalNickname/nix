@@ -20,9 +20,12 @@
     home.packages = with pkgs; [
         # CLI utils
         hyperfine
+        ripgrep
+        haskellPackages.hoogle
         flac
         wakatime-cli
         ffmpeg
+        newsraft
         blahaj 
         nmap
         fzf
@@ -35,6 +38,7 @@
 
         # GUI apps
         quake3e
+        angryipscanner
         owmods-cli
         chromium
         praat
@@ -42,6 +46,7 @@
         qmk-udev-rules
         vial
         heroic
+        slack
         qutebrowser
         krita
         prismlauncher

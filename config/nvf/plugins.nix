@@ -19,38 +19,19 @@
 
     programs.nvf.settings.vim.lazy.enable = true;
 
-    programs.nvf.settings.vim.lazy.plugins.rustaceanvim = {
-        ft = "rust";
-        package = pkgs.vimPlugins.rustaceanvim;
-        after = ''
-            vim.keymap.set(
-              "n",
-              "K", 
-              function()
-                vim.cmd.RustLsp({'hover', 'actions'})
-              end,
-              { silent = true, buffer = bufnr }
-            )
-            vim.keymap.set(
-              "n",
-              "E", 
-              function()
-                vim.cmd.RustLsp({ 'renderDiagnostic', 'current' })
-              end,
-              { silent = true, buffer = bufnr }
-            )
-        '';
-    };
-
-    programs.nvf.settings.vim.lazy.plugins."haskell-tools.nvim" = {
-        ft = "haskell";
-        package = pkgs.vimPlugins.haskell-tools-nvim;
-        after = ''
-            local ht = require('haskell-tools')
-            local bufnr = vim.api.nvim_get_current_buf()
-            local opts = { noremap = true, silent = true, buffer = bufnr, }
-            vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
-        '';
+    programs.nvf.settings.vim.telescope = {
+        enable = true;
+        extensions = [
+            {
+                name = "hoogle";
+                packages = [pkgs.vimPlugins.telescope_hoogle];
+            }
+            {
+                name = "fzf";
+                packages = [pkgs.vimPlugins.telescope-fzf-native-nvim];
+                setup = {fzf = {fuzzy = true;};};
+            }
+        ];
     };
 
     programs.nvf.settings.vim.extraPlugins = {
@@ -65,6 +46,48 @@
                     end,
                 }
             '';
+        };
+
+        rustaceanvim = {
+            package = pkgs.vimPlugins.rustaceanvim;
+            # setup = ''
+            #     vim.keymap.set(
+            #       "n",
+            #       "K", 
+            #       function()
+            #         vim.cmd.RustLsp({'hover', 'actions'})
+            #       end,
+            #       { silent = true, buffer = bufnr }
+            #     )
+            #     vim.keymap.set(
+            #       "n",
+            #       "E", 
+            #       function()
+            #         vim.cmd.RustLsp({ 'renderDiagnostic', 'current' })
+            #       end,
+            #       { silent = true, buffer = bufnr }
+            #     )
+            # '';
+        };
+
+        haskell-tools-nvim = {
+            package = pkgs.vimPlugins.haskell-tools-nvim;
+            # setup = ''
+            #     vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
+
+            #     vim.keymap.set(
+            #       "n",
+            #       "K", 
+            #       function()
+            #         vim.cmd.Haskell({'hover', 'actions'})
+            #       end,
+            #       { silent = true, buffer = bufnr }
+            #     )
+            # '';
+        };
+
+        wakatime = {
+            package = pkgs.vimPlugins.vim-wakatime;
         };
 
         # cord = {
