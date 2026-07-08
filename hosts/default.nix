@@ -1,0 +1,89 @@
+{ withSystem, inputs, ... }:
+let
+    lib = inputs.nixpkgs.lib;
+in
+{
+    flake.nixosConfigurations =
+        let
+            inherit (lib.lists)
+                concatLists
+                flatten
+                singleton
+                filter
+                elem
+                ;
+            inherit (lib.strings) hasSuffix;
+            inherit (lib.filesystem) listFilesRecursive;
+
+            hm = inputs.home-manager.nixosModules.home-manager;
+
+            # Modules
+            root = ../modules;
+            core = root + /core;
+            common = core + /common;
+            options = root + /options;
+
+            # Traits
+            traits = root + /traits;
+            graphical = traits + /graphical;
+            headless = traits + /headless;
+
+            homes = [
+                hm
+                ../homes
+            ];
+
+            mkModuleTree =
+                {
+                    path,
+                    ignoredPaths ? [ ],
+                }:
+                (filter (path: hasSuffix "module.nix" path) (
+                    map toString (filter (path: !elem path ignoredPaths) (listFilesRecursive path))
+                ));
+
+            mkModulesFor =
+                hostname:
+                {
+                    traits ? [ ],
+                    extraModules ? [ ],
+                }:
+                flatten (concatLists [
+                    extraModules
+                    [ ./${hostname}/host.nix ]
+                    (map (path: mkModuleTree { inherit path; }) (
+                        traits
+                        ++ [
+                            options
+                            common
+                        ]
+                    ))
+                ]);
+
+            mkSystem =
+                let
+                    inherit (inputs) self;
+                in
+                {
+                    hostname,
+                    system ? "x86_64-linux",
+                    extraModules ? [ ],
+                }:
+                lib.nixosSystem {
+                    specialArgs = {
+                        inherit inputs self;
+                    };
+                    system = system;
+                    modules =
+                        mkModulesFor hostname { extraModules = extraModules; }
+                        ++ singleton { networking.hostName = hostname; };
+                };
+
+        in
+        {
+            andropov = mkSystem {
+                hostname = "andropov";
+                extraModules = homes;
+            };
+        };
+}

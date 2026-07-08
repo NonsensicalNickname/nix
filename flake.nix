@@ -4,6 +4,9 @@
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+        flake-parts.url = "github:hercules-ci/flake-parts";
+        flake-parts.inputs.nixpkgs.follows = "nixpkgs";
+
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -23,33 +26,13 @@
         sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { self, nixpkgs, home-manager, fenix, ... }@inputs : {
-        nixosConfigurations.goose = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-                ./configuration.nix
-                home-manager.nixosModules.home-manager {
-                    home-manager = {
-                        useGlobalPkgs = true;
-                        useUserPackages = true;
-                        extraSpecialArgs = { inherit inputs; };
-                        users.ceri = ./home.nix; 
-                    };
-                }
-                ({ pkgs, ... }: {
-                    nixpkgs.overlays = [ fenix.overlays.default ];
-                    environment.systemPackages = [
-                        (pkgs.fenix.complete.withComponents [
-                            "cargo"
-                            "clippy"
-                            "rust-src"
-                            "rustc"
-                            "rustfmt"
-                        ])
-                        #pkgs.rust-analyzer-nightly
-                    ];
-                })
+    outputs =
+        inputs:
+        inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+            systems = [ "x86_64-linux" ];
+
+            imports = [
+                ./hosts
             ];
         };
-    };
 }
