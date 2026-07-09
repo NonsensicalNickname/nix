@@ -41,6 +41,7 @@ in
                 { sh = "xwayland-satellite :1"; }
                 { sh = "steam -silent"; }
                 { sh = "mprisence"; }
+                { sh = "fcitx5 -d"; }
             ];
 
             layout = {
