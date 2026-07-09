@@ -1,4 +1,7 @@
-{ ... }:
+{ configured, ... }:
+let
+    displayName = configured.device.display.name;
+in
 {
     services.mako = {
         enable = true;
@@ -34,5 +37,5 @@
     services.mpd-mpris.enable = true;
 
     services.wpaperd.enable = true;
-    services.wpaperd.settings.DP-1.path = ./../../res/walls/rpm-squares.png;
+    services.wpaperd.settings.${displayName}.path = ./../../res/walls/rpm-squares.png;
 }

@@ -26,10 +26,13 @@ in
 
             screenshot-path = "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S.png";
 
-            outputs.${display.name}.mode = {
-                width = display.width;
-                height = display.height;
-                refresh = display.refreshRate;
+            outputs.${display.name} = {
+                mode = {
+                    width = display.width;
+                    height = display.height;
+                    refresh = display.refreshRate;
+                };
+                scale = display.scale;
             };
 
             spawn-at-startup = [
