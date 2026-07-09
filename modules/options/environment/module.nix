@@ -10,7 +10,7 @@ let
     inherit (lib.types) bool enum package;
 in
 {
-    options.modules.env = {
+    options.modules.environment = {
         useHomeManager = mkOption {
             type = bool;
             default = true;
