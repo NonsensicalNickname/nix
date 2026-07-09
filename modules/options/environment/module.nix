@@ -1,20 +1,27 @@
 {
-    inputs',
-    config,
-    pkgs,
     lib,
     ...
 }:
 let
     inherit (lib.options) mkOption;
-    inherit (lib.types) bool enum package;
+    inherit (lib) mkEnableOption;
+    inherit (lib.types) bool;
 in
 {
     options.modules.environment = {
         useHomeManager = mkOption {
             type = bool;
             default = true;
-            description = "If home manager should be used";
+            description = "Should this system use home manager";
+        };
+
+        virtualisation = {
+            virtualbox = {
+                enable = mkEnableOption "virtualbox";
+            };
+            waydroid = {
+                enable = mkEnableOption "waydroid";
+            };
         };
     };
 }

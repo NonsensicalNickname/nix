@@ -11,16 +11,15 @@ let
     inherit (lib.attrsets) genAttrs;
     inherit (config) modules;
 
-    #env = modules.usrEnv;
-    #sys = modules.system;
-    #defaults = sys.programs.default;
+    configured = modules;
 
     specialArgs = {
         inherit
             inputs
             self
             inputs'
-            self' # defaults
+            configured
+            self'
             ;
     };
 in

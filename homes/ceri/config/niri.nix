@@ -1,4 +1,12 @@
-{ pkgs, config, ... }:
+{
+    pkgs,
+    config,
+    configured,
+    ...
+}:
+let
+    display = configured.device.display;
+in
 {
     # TODO:
     # windowrules
@@ -18,10 +26,10 @@
 
             screenshot-path = "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S.png";
 
-            outputs."DP-1".mode = {
-                width = 1920;
-                height = 1080;
-                refresh = 164.955;
+            outputs.${display.name}.mode = {
+                width = display.width;
+                height = display.height;
+                refresh = display.refreshRate;
             };
 
             spawn-at-startup = [

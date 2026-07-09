@@ -13,6 +13,7 @@ let
         int
         attrs
         enum
+        bool
         ;
 
     mkPalette =
@@ -48,6 +49,15 @@ in
             type = either str (listOf str);
             default = [ ];
             description = "Wallpaper(s)";
+        };
+
+        rgb = {
+            # TODO: Actually provide a means of configuring openrgb
+            enable = mkOption {
+                type = bool;
+                default = false;
+                description = "RGB control via OpenRGB";
+            };
         };
 
         colourscheme = rec {

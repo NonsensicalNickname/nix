@@ -1,10 +1,19 @@
-{ pkgs, ... }:
 {
-    services.hardware.openrgb.enable = true;
+    pkgs,
+    lib,
+    config,
+    ...
+}:
+let
+    inherit (lib.modules) mkIf;
+    rgb = config.modules.style.rgb;
+in
+{
+    services.hardware.openrgb = mkIf rgb.enable {
+        enable = true;
+    };
 
     services.mpd.enable = false;
-
-    services.hardware.deepcool-digital-linux.enable = true;
 
     services.dbus.implementation = "broker";
 

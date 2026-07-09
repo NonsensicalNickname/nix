@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+    # TODO: Make good
     home.packages = with pkgs; [
         # CLI utils
         hyperfine

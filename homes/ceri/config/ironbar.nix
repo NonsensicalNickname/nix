@@ -1,10 +1,18 @@
-{ pkgs, config, ... }:
+{
+    pkgs,
+    config,
+    configured,
+    ...
+}:
+let
+    displayName = configured.device.display.name;
+in
 {
     programs.ironbar = {
         enable = true;
         package = pkgs.ironbar;
         config = {
-            monitors.DP-1 = {
+            monitors.${displayName} = {
                 position = "bottom";
                 height = 12;
                 start = [

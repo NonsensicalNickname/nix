@@ -6,7 +6,20 @@
 }:
 {
     imports = [ ./hardware.nix ];
-    # Modify module config here, e,g.
-    # config.modules.style.cursor.name = "bimgus";
-    system.stateVersion = "25.11";
+    config = {
+        # Modify module config here, e,g.
+        modules.style.rgb.enable = true;
+
+        modules.environment.virtualisation = {
+            virtualbox.enable = true;
+            waydroid.enable = true;
+        };
+
+        # Defaults are 1920 x 1080 and DP-1
+        modules.device = {
+            display.refreshRate = 164.955;
+        };
+
+        system.stateVersion = "25.11";
+    };
 }

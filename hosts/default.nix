@@ -26,6 +26,7 @@ in
             # Traits
             traits = root + /traits;
             graphical = traits + /graphical;
+            development = traits + /development;
             headless = traits + /headless;
 
             homes = [
@@ -67,6 +68,7 @@ in
                 {
                     hostname,
                     system ? "x86_64-linux",
+                    traits ? [ ],
                     extraModules ? [ ],
                 }:
                 lib.nixosSystem {
@@ -75,7 +77,10 @@ in
                     };
                     system = system;
                     modules =
-                        mkModulesFor hostname { extraModules = extraModules; }
+                        mkModulesFor hostname {
+                            extraModules = extraModules;
+                            traits = traits;
+                        }
                         ++ singleton { networking.hostName = hostname; };
                 };
 
@@ -84,6 +89,13 @@ in
             andropov = mkSystem {
                 hostname = "andropov";
                 extraModules = homes;
+                traits = [ development ];
+            };
+
+            kochiyama = mkSystem {
+                hostname = "kochiyama";
+                extraModules = homes;
+                traits = [ development ];
             };
         };
 }
