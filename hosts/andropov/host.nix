@@ -7,7 +7,6 @@
 {
     imports = [ ./hardware.nix ];
     config = {
-        # Modify module config here, e,g.
         modules.style.rgb.enable = true;
 
         modules.environment.virtualisation = {
