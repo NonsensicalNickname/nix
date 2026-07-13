@@ -5,6 +5,7 @@
         ./ironbar.nix
         ./fish.nix
         ./rmpc.nix
+        ./librewolf.nix
         ./nvf
     ];
 }
