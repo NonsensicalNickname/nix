@@ -31,6 +31,10 @@
         ];
     };
 
+    programs.librewolf = {
+        enable = true;
+    };
+
     programs.fuzzel = {
         enable = true;
         settings = {

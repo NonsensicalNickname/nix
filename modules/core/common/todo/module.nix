@@ -2,6 +2,10 @@
 {
     networking.networkmanager.enable = true;
 
+    environment.systemPackages = with pkgs; [
+        acpi
+    ];
+
     fonts = {
         packages = with pkgs; [
             nerd-fonts.jetbrains-mono

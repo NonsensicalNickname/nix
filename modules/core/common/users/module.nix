@@ -7,6 +7,9 @@
                 "wheel"
                 "input"
                 "networkmanager"
+                "tty"
+                "dialout"
+                "uucp"
             ];
         };
 

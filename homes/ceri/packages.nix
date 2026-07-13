@@ -40,7 +40,6 @@
         jq
 
         drawterm-wayland
-        librewolf-bin
 
         # GUI apps
 
@@ -65,7 +64,6 @@
         keepassxc
         tageditor
         parsec-bin
-        firefox-bin
         schismtracker
 
         # TUI apps

@@ -23,6 +23,7 @@ in
             environment.DISPLAY = ":1";
 
             input.mouse.accel-profile = "flat";
+            input.touchpad.dwt = true;
 
             screenshot-path = "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S.png";
 
