@@ -23,5 +23,12 @@ in
                 enable = mkEnableOption "waydroid";
             };
         };
+
+        game = {
+            enable = mkEnableOption "game";
+            emulation = {
+                enable = mkEnableOption "emulation";
+            };
+        };
     };
 }

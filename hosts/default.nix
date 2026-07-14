@@ -19,8 +19,7 @@ in
 
             # Modules
             root = ../modules;
-            core = root + /core;
-            common = core + /common;
+            common = root + /common;
             options = root + /options;
 
             # Traits

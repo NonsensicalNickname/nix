@@ -2,10 +2,12 @@
     pkgs,
     config,
     configured,
+    flakeroot,
     ...
 }:
 let
     display = configured.device.display;
+    scripts = "${flakeroot}/res/scripts";
 in
 {
     # TODO:
@@ -118,14 +120,14 @@ in
                 "F10".action.spawn-sh = "hyprpicker | wl-copy";
 
                 "F4".action.spawn-sh = "makoctl dismiss";
-                "Mod+D".action.spawn-sh = "fish /home/ceri/.config/nix/scripts/define.fish";
+                "Mod+D".action.spawn-sh = "fish ${scripts}/define.fish";
 
                 "Mod+C".action = close-window;
                 "Mod+Shift+F".action = fullscreen-window;
                 "Mod+F".action = maximize-column;
                 "Mod+R".action.spawn-sh = "ironbar reload && ironbar style load-css /home/ceri/style.css";
 
-                "Ctrl+Alt+Delete".action.spawn-sh = "fish /home/ceri/.config/nix/scripts/power_menu.fish";
+                "Ctrl+Alt+Delete".action.spawn-sh = "fish ${scripts}/power_menu.fish";
             };
         };
     };

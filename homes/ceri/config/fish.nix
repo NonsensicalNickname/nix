@@ -1,7 +1,14 @@
-{ config, pkgs, ... }:
 {
-    xdg.configFile."fish/themes/rose-pine-moon.theme".source =
-        "/home/ceri/.config/nix/themes/fish/rose-pine-moon.theme";
+    config,
+    pkgs,
+    flakeroot,
+    ...
+}:
+let
+    themes = "${flakeroot}/res/themes";
+in
+{
+    xdg.configFile."fish/themes/rose-pine-moon.theme".source = "${themes}/fish/rose-pine-moon.theme";
 
     programs.fish = {
         enable = true;
@@ -10,7 +17,7 @@
             v = "nvim";
             m = "math";
 
-            nrs = "sudo nixos-rebuild switch --flake . --impure";
+            nrs = "nh os switch --impure";
             nfu = "sudo nix flake update";
             nup = "nfu; nrs";
             nsc = "sudo nix-collect-garbage && sudo nix-collect-garbage -d";

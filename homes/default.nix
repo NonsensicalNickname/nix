@@ -12,6 +12,7 @@ let
     inherit (config) modules;
 
     configured = modules;
+    flakeroot = builtins.toString ../.;
 
     specialArgs = {
         inherit
@@ -20,6 +21,7 @@ let
             inputs'
             configured
             self'
+            flakeroot
             ;
     };
 in

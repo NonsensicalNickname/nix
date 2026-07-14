@@ -1,10 +1,18 @@
-{ pkgs, config, ... }:
+{
+    pkgs,
+    config,
+    flakeroot,
+    ...
+}:
+let
+    themes = "${flakeroot}/res/themes";
+in
 {
     programs.foot = {
         enable = true;
         settings = {
             main = {
-                include = "/home/ceri/.config/nix/themes/foot/rose-pine-moon";
+                include = "${themes}/foot/rose-pine-moon";
                 font = "JetBrainsMono NF:size=10";
                 font-size-adjustment = "0.5";
                 initial-window-mode = "windowed";

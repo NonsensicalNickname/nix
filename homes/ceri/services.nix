@@ -1,6 +1,7 @@
-{ configured, ... }:
+{ configured, flakeroot, ... }:
 let
     displayName = configured.device.display.name;
+    walls = "${flakeroot}/res/walls";
 in
 {
     services.mako = {
@@ -37,5 +38,5 @@ in
     services.mpd-mpris.enable = true;
 
     services.wpaperd.enable = true;
-    services.wpaperd.settings.${displayName}.path = ./../../res/walls/rpm-squares.png;
+    services.wpaperd.settings.${displayName}.path = builtins.toPath "${walls}/rpm-squares.png";
 }
