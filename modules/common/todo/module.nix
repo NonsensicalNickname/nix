@@ -2,10 +2,6 @@
 {
     networking.networkmanager.enable = true;
 
-    environment.systemPackages = with pkgs; [
-        acpi
-    ];
-
     fonts = {
         packages = with pkgs; [
             nerd-fonts.jetbrains-mono
@@ -24,24 +20,6 @@
                 monospace = [ "JetBrainsMono NF" ];
             };
         };
-    };
-
-    xdg.portal = {
-        config.common = {
-            default = [
-                "gnome"
-            ];
-            "org.freedesktop.portal.ScreenCast" = [
-                "gnome"
-            ];
-        };
-
-        enable = true;
-        xdgOpenUsePortal = true;
-        extraPortals = [
-            pkgs.xdg-desktop-portal-gnome
-            pkgs.xdg-desktop-portal-gtk
-        ];
     };
 
     security.rtkit.enable = true;

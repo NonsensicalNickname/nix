@@ -17,18 +17,6 @@ in
 
     services.dbus.implementation = "broker";
 
-    services.displayManager.sessionPackages = [
-        pkgs.niri
-    ];
-
-    services.displayManager.defaultSession = "niri";
-    services.displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-        wayland.compositor = "weston";
-        theme = "catppuccin-macchiato-mauve";
-    };
-
     services.openssh = {
         enable = true;
         ports = [ 22 ];

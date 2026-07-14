@@ -10,6 +10,7 @@
 
         systemPackages = with pkgs; [
             vim
+            acpi
             git
             wget
             fd
@@ -27,11 +28,6 @@
             gnumake
             cmake
             nixfmt
-
-            (catppuccin-sddm.override {
-                flavor = "macchiato";
-                accent = "mauve";
-            })
         ];
     };
 }
