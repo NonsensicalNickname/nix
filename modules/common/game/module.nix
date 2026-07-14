@@ -17,7 +17,7 @@ in
             steam = prev.steam.override {
                 extraArgs = "-cef-disable-gpu-compositing";
             };
-        })   
+        })
     ];
 
     programs.steam = mkIf game {
