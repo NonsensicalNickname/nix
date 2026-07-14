@@ -96,5 +96,10 @@ in
                 extraModules = homes;
                 traits = [ development ];
             };
+
+            knorozov = mkSystem {
+                hostname = "knorozov";
+                traits = [ ];
+            };
         };
 }
