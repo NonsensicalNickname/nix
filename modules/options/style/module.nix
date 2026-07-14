@@ -1,6 +1,7 @@
 {
     pkgs,
     lib,
+    config,
     ...
 }:
 let
@@ -18,7 +19,7 @@ let
 
     mkPalette =
         slug:
-        if builtins.pathExists ./palettes${slug}.nix then
+        if builtins.pathExists ./palettes/${slug}.nix then
             (import ./palettes/${slug}.nix).colourscheme.palette
         else
             throw "${slug} not found in palettes";
@@ -60,7 +61,7 @@ in
             };
         };
 
-        colourscheme = rec {
+        colourscheme = {
             name = mkOption {
                 type = str;
                 default = "Rosé Pine Moon";
@@ -75,7 +76,7 @@ in
 
             palette = mkOption {
                 type = attrs;
-                default = mkPalette name;
+                default = mkPalette config.modules.style.colourscheme.slug;
                 description = "Attrset of a base16 colourscheme";
             };
 

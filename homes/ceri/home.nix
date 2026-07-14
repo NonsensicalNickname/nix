@@ -7,11 +7,13 @@
             ironbar.homeManagerModules.default
             nvf.homeManagerModules.default
             sops-nix.homeManagerModules.sops
+            schizofox.homeManagerModules.default
         ]
         ++ [
             ./packages.nix
             ./programs.nix
             ./services.nix
+            ./misc.nix
             ./config
         ];
 

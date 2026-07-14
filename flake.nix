@@ -19,6 +19,9 @@
         nvf.url = "github:NotAShelf/nvf";
         nvf.inputs.nixpkgs.follows = "nixpkgs";
 
+        schizofox.url = "github:schizofox/schizofox";
+        schizofox.inputs.nixpkgs.follows = "nixpkgs";
+
         fenix.url = "github:nix-community/fenix";
         fenix.inputs.nixpkgs.follows = "nixpkgs";
 

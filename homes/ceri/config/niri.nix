@@ -73,7 +73,7 @@ in
             binds = with config.lib.niri.actions; {
                 "Mod+Q".action.spawn = "foot";
                 "Mod+Z".action.spawn = "fuzzel";
-                "Mod+B".action.spawn = "librewolf";
+                "Mod+B".action.spawn = "schizofox";
 
                 "XF86AudioMute".action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
                 "XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+";
