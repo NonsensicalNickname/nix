@@ -12,5 +12,5 @@ Currently configured machines are andropov and kochiyama (see above for table of
 ## TODO
 - Make use of colours
 - Add to options
-- Move themes / scripts / res around
-- Laptop config (kochiyama)
+- server / headless config
+- move away from ironbar bc its fucking cringe
