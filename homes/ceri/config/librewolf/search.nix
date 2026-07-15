@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
     programs.librewolf.profiles."default".search = {
+        force = true;
         engines = {
             nix-packages = {
                 name = "Nix Packages";
@@ -49,8 +50,22 @@
             nixos-wiki = {
                 name = "NixOS Wiki";
                 urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
-                iconMapObj."16" = "https://wiki.nixos.org/favicon.ico";
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@nw" ];
+            };
+
+            arch-wiki = {
+                name = "Arch Wiki";
+                urls = [ { template = "https://wiki.archlinux.org/index.php?search={searchTerms}"; } ];
+                definedAliases = [ "@aw" ];
+                iconMapObj."16" = "https://wiki.archlinux.org/favicon.ico";
+            };
+
+            man-pages = {
+                name = "Man Pages";
+                urls = [ { template = "https://man.archlinux.org/search?q={searchTerms}"; } ];
+                definedAliases = [ "@mp" ];
+                iconMapObj."16" = "https://man.archlinux.org/favicon.ico";
             };
         };
     };

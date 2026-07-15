@@ -13,6 +13,7 @@ in
     # TODO:
     # windowrules
     # volume popup thingy perhaps
+    # configurable browser etc programs
 
     programs.niri = {
         enable = true;
@@ -73,7 +74,7 @@ in
             binds = with config.lib.niri.actions; {
                 "Mod+Q".action.spawn = "foot";
                 "Mod+Z".action.spawn = "fuzzel";
-                "Mod+B".action.spawn = "schizofox";
+                "Mod+B".action.spawn = "librewolf";
 
                 "XF86AudioMute".action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
                 "XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+";

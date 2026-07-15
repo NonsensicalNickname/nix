@@ -7,6 +7,7 @@
         ./search.nix
     ];
 
+    # TODO: Extension permissions
     programs.librewolf = {
         enable = true;
         profiles."default".isDefault = true;
