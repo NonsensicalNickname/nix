@@ -7,8 +7,6 @@
         ./search.nix
     ];
 
-    xdg.configFile."/home/ceri/.librewolf/profiles.ini".force = true;
-
     # TODO: Extension permissions
     programs.librewolf = {
         enable = true;

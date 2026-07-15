@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+    pkgs,
+    ...
+}:
 {
     programs.librewolf.profiles."default".search = {
         force = true;
