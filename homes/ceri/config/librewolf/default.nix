@@ -5,6 +5,7 @@
         ./extensions.nix
         ./settings.nix
         ./search.nix
+        # ./bookmarks.nix
     ];
 
     # TODO: Extension permissions

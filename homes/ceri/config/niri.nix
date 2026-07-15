@@ -42,6 +42,7 @@ in
             spawn-at-startup = [
                 { sh = "ironbar"; }
                 { sh = "wpaperd"; }
+                { sh = "openrgb -b 0"; }
                 { sh = "xwayland-satellite :1"; }
                 { sh = "steam -silent"; }
                 { sh = "mprisence"; }
@@ -81,7 +82,7 @@ in
                 "XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-";
                 "Shift+XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1+";
                 "Shift+XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1-";
-                "Shift+delete".action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@";
+                "Shift+delete".action.spawn-sh = "fish ${scripts}/mute.fish";
 
                 "Mod+Y".action.focus-workspace = "buffer";
                 "Mod+U".action.focus-workspace = "browser";
