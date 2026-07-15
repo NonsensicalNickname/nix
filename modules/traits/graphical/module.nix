@@ -30,7 +30,7 @@
         theme = "catppuccin-macchiato-mauve";
     };
 
-    systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs; [
         (catppuccin-sddm.override {
             flavor = "macchiato";
             accent = "mauve";
