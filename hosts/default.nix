@@ -88,13 +88,19 @@ in
             andropov = mkSystem {
                 hostname = "andropov";
                 extraModules = homes;
-                traits = [ graphical development ];
+                traits = [
+                    graphical
+                    development
+                ];
             };
 
             kochiyama = mkSystem {
                 hostname = "kochiyama";
                 extraModules = homes;
-                traits = [ graphical development ];
+                traits = [
+                    graphical
+                    development
+                ];
             };
 
             knorozov = mkSystem {
