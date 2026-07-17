@@ -6,25 +6,27 @@
 }:
 {
     imports = [ ./hardware.nix ];
-    config = {
-        modules.style.rgb.enable = true;
+    config.modules = {
+        style.rgb.enable = true;
 
-        modules.environment.virtualisation = {
+        environment.virtualisation = {
             virtualbox.enable = true;
             waydroid.enable = true;
         };
 
-        # TODO: trait
-        modules.environment.game = {
+        containers.enabledContainers = [ "webserver" ];
+
+        # TODO: trait maybe
+        environment.game = {
             enable = true;
             emulation.enable = true;
         };
 
         # Defaults are 1920 x 1080 and DP-1
-        modules.device = {
+        device = {
             display.refreshRate = 164.955;
         };
-
-        system.stateVersion = "25.11";
     };
+
+    config.system.stateVersion = "25.11";
 }

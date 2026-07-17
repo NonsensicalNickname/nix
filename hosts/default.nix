@@ -1,4 +1,4 @@
-{ withSystem, inputs, ... }:
+{ inputs, ... }:
 let
     lib = inputs.nixpkgs.lib;
 in
@@ -20,6 +20,7 @@ in
             # Modules
             root = ../modules;
             common = root + /common;
+            containers = root + /containers;
             options = root + /options;
 
             # Traits
@@ -56,6 +57,7 @@ in
                         ++ [
                             options
                             common
+                            containers
                         ]
                     ))
                 ]);

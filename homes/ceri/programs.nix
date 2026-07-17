@@ -53,4 +53,8 @@
             };
         };
     };
+
+    programs.thunderbird = {
+        enable = true;
+    };
 }
