@@ -53,8 +53,4 @@
             };
         };
     };
-
-    programs.thunderbird = {
-        enable = true;
-    };
 }
