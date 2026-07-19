@@ -47,7 +47,7 @@
             markdown.enable = true;
             typst.enable = true;
             typst.lsp.servers = [ "tinymist" ];
-            rust.enable = true;
+            rust.enable = false; # rustaceanvim is enabled
             zig.enable = true;
         };
     };

@@ -38,12 +38,6 @@
             action = ":lua MiniFiles.open()<CR>";
         }
         {
-            key = "<S-m>";
-            mode = "n";
-            silent = true;
-            action = ":RustLsp expandMacro<CR>";
-        }
-        {
             key = "<A-]>";
             mode = "n";
             silent = true;

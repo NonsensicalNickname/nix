@@ -21,7 +21,7 @@
                 function()
                     if vim.bo.filetype == 'rust' then
                         local bufnr = vim.api.nvim_get_current_buf()
-                        local opts = { noremap = true, silent = true, buffer = bufnr, }
+                        local opts = { noremap = true, silent = true, buf = bufnr, }
 
                         vim.keymap.set(
                             "n",
@@ -29,7 +29,7 @@
                             function()
                                 vim.cmd.RustLsp({'hover', 'actions'})
                             end,
-                            { silent = true, buffer = bufnr }
+                            opts
                         )
                         vim.keymap.set(
                             "n",
@@ -37,7 +37,15 @@
                             function()
                                 vim.cmd.RustLsp({ 'renderDiagnostic', 'current' })
                             end,
-                            { silent = true, buffer = bufnr }
+                            opts
+                        )
+                        vim.keymap.set(
+                            "n",
+                            "M", 
+                            function()
+                                vim.cmd.RustLsp({ 'expandMacro', 'current' })
+                            end,
+                            opts
                         )
                     end
                 end
@@ -53,7 +61,7 @@
                     if vim.bo.filetype == 'haskell' then
                         local ht = require('haskell-tools')
                         local bufnr = vim.api.nvim_get_current_buf()
-                        local opts = { noremap = true, silent = true, buffer = bufnr, }
+                        local opts = { noremap = true, silent = true, buf = bufnr, }
 
                         vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
 
@@ -63,7 +71,7 @@
                             function()
                                 vim.cmd.Haskell({'hover', 'actions'})
                             end,
-                            { silent = true, buffer = bufnr }
+                            { silent = true, buf = bufnr }
                         )
                     end
                 end

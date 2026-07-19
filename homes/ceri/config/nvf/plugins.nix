@@ -53,24 +53,6 @@
 
         rustaceanvim = {
             package = pkgs.vimPlugins.rustaceanvim;
-            # setup = ''
-            #     vim.keymap.set(
-            #       "n",
-            #       "K",
-            #       function()
-            #         vim.cmd.RustLsp({'hover', 'actions'})
-            #       end,
-            #       { silent = true, buffer = bufnr }
-            #     )
-            #     vim.keymap.set(
-            #       "n",
-            #       "E",
-            #       function()
-            #         vim.cmd.RustLsp({ 'renderDiagnostic', 'current' })
-            #       end,
-            #       { silent = true, buffer = bufnr }
-            #     )
-            # '';
         };
 
         haskell-tools-nvim = {

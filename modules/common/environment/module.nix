@@ -28,6 +28,11 @@
             gnumake
             cmake
             nixfmt
+
+            man-pages
+            man-pages-posix
         ];
     };
+
+    documentation.dev.enable = true;
 }
