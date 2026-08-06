@@ -4,6 +4,7 @@
     home.packages = with pkgs; [
         # CLI utils
         hyperfine
+        beets
         ripgrep
         haskellPackages.hoogle
         flac
@@ -69,6 +70,7 @@
         # TUI apps
         wiremix
         bulletty
+        presenterm
         wikiman
         gdu
         yazi
