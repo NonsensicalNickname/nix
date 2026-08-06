@@ -13,9 +13,6 @@
         niri.url = "github:sodiboo/niri-flake";
         niri.inputs.nixpkgs.follows = "nixpkgs";
 
-        ironbar.url = "github:JakeStanger/ironbar";
-        ironbar.inputs.nixpkgs.follows = "nixpkgs";
-
         nvf.url = "github:NotAShelf/nvf";
         nvf.inputs.nixpkgs.follows = "nixpkgs";
 

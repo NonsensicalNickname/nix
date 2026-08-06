@@ -25,6 +25,7 @@
         # Defaults are 1920 x 1080 and DP-1
         device = {
             display.refreshRate = 164.955;
+            display.external = true;
         };
     };
 

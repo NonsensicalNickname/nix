@@ -4,7 +4,6 @@
         with inputs;
         [
             niri.homeModules.niri
-            ironbar.homeManagerModules.default
             nvf.homeManagerModules.default
             sops-nix.homeManagerModules.sops
         ]

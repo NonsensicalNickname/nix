@@ -35,5 +35,8 @@
             flavor = "macchiato";
             accent = "mauve";
         })
+
+        chameleos
+        wob
     ];
 }

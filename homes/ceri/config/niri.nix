@@ -1,13 +1,17 @@
 {
     pkgs,
+    lib,
     config,
     configured,
     flakeroot,
     ...
 }:
 let
+    inherit (lib) mkIf;
+    inherit (import "${flakeroot}/helpers") mkIfElse;
     display = configured.device.display;
     scripts = "${flakeroot}/res/scripts";
+    wobsock = "$XDG_RUNTIME_DIR/wobsock.sock";
 in
 {
     # TODO:
@@ -40,13 +44,13 @@ in
             };
 
             spawn-at-startup = [
-                { sh = "ironbar"; }
                 { sh = "wpaperd"; }
                 { sh = "openrgb -b 0"; }
                 { sh = "xwayland-satellite :1"; }
                 { sh = "steam -silent"; }
                 { sh = "mprisence"; }
                 { sh = "fcitx5 -d"; }
+                { sh = "rm -f ${wobsock} && mkfifo ${wobsock} && tail -f ${wobsock} | wob"; }
             ];
 
             layout = {
@@ -77,12 +81,23 @@ in
                 "Mod+Z".action.spawn = "fuzzel";
                 "Mod+B".action.spawn = "librewolf";
 
-                "XF86AudioMute".action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-                "XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+";
-                "XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-";
-                "Shift+XF86AudioRaiseVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1+";
-                "Shift+XF86AudioLowerVolume".action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1-";
+                "XF86AudioMute".action.spawn-sh =
+                    "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && (wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo 0 > ${wobsock}) || wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > ${wobsock}";
+                "XF86AudioRaiseVolume".action.spawn-sh =
+                    "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > ${wobsock}";
+                "XF86AudioLowerVolume".action.spawn-sh =
+                    "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > ${wobsock}";
+
+                "Shift+XF86AudioRaiseVolume".action.spawn-sh =
+                    "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1+ > ${wobsock}";
+                "Shift+XF86AudioLowerVolume".action.spawn-sh =
+                    "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.1- > ${wobsock}";
                 "Shift+delete".action.spawn-sh = "fish ${scripts}/mute.fish";
+
+                # "Mod+XF86AudioRaiseVolume".action.spawn-sh = mkIfElse display.external {
+                #     body = "ddcutil setvcp 10 $(($(ddcutil getvcp 10 | sed 's/.*current value =\(.*\),.*/\1/g') + 5))";
+                #     elseBody = "";
+                # };
 
                 "Mod+Y".action.focus-workspace = "buffer";
                 "Mod+U".action.focus-workspace = "browser";
@@ -127,7 +142,6 @@ in
                 "Mod+C".action = close-window;
                 "Mod+Shift+F".action = fullscreen-window;
                 "Mod+F".action = maximize-column;
-                "Mod+R".action.spawn-sh = "ironbar reload && ironbar style load-css /home/ceri/style.css";
 
                 "Ctrl+Alt+Delete".action.spawn-sh = "fish ${scripts}/power_menu.fish";
             };

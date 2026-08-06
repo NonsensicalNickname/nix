@@ -45,6 +45,12 @@ in
                 default = 60.0;
                 description = "The default display refresh rate";
             };
+
+            external = mkOption {
+                type = bool;
+                default = false;
+                description = "If this display is an external display";
+            };
         };
     };
 }

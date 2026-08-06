@@ -5,11 +5,12 @@
     ...
 }:
 let
-    inherit (import ../helpers lib config) mkContainer;
+    inherit (import ../../utils { inherit lib; }) mkContainer;
+    enabledContainers = config.modules.containers.enabledContainers;
     name = "webserver";
 in
 {
-    containers.${name} = mkContainer {
+    containers.${name} = mkContainer enabledContainers {
         inherit name;
         body = {
             autoStart = true;
