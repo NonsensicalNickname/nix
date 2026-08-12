@@ -45,10 +45,10 @@ in
         ];
     };
 
-    programs = mkIf (shell.name == "fish") {
-        fish.enable = true;
-        command-not-found.enable = false;
-    };
+    programs.fish.enable = (shell.name == "fish");
+    programs.command-not-found.enable = (shell.name != "fish");
+
+    programs.zsh.enable = (shell.name == "zsh");
 
     documentation.dev.enable = true;
 }
