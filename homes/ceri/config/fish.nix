@@ -1,16 +1,19 @@
 {
-    config,
+    configured,
     pkgs,
     flakeroot,
+    lib,
     ...
 }:
 let
+    inherit (lib) mkIf;
+    shell = configured.environment.shell;
     themes = "${flakeroot}/res/themes";
 in
 {
     xdg.configFile."fish/themes/rose-pine-moon.theme".source = "${themes}/fish/rose-pine-moon.theme";
 
-    programs.fish = {
+    programs.fish = mkIf (shell.name == "fish") {
         enable = true;
 
         shellAliases = {

@@ -1,4 +1,11 @@
-{ pkgs, ... }:
+{
+    config,
+    pkgs,
+    ...
+}:
+let
+    shell = config.modules.environment.shell;
+in
 {
     users.users = {
         ceri = {
@@ -22,5 +29,5 @@
 
     users.groups.postgres = { };
 
-    users.defaultUserShell = pkgs.fish;
+    users.defaultUserShell = shell.package;
 }

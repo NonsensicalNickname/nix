@@ -1,4 +1,13 @@
-{ pkgs, ... }:
+{
+    lib,
+    config,
+    pkgs,
+    ...
+}:
+let
+    inherit (lib) mkIf;
+    shell = config.modules.environment.shell;
+in
 {
     imports = [ ./locale.nix ];
 
@@ -31,7 +40,14 @@
 
             man-pages
             man-pages-posix
+
+            shell.package
         ];
+    };
+
+    programs = mkIf (shell.name == "fish") {
+        fish.enable = true;
+        command-not-found.enable = false;
     };
 
     documentation.dev.enable = true;

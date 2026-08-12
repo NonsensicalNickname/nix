@@ -1,3 +1,6 @@
 {
-    imports = [ ./rust.nix ];
+    imports = [
+        ./rust.nix
+        # ./wpilib.nix
+    ];
 }
