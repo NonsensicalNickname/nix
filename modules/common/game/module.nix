@@ -28,5 +28,8 @@ in
 
     environment.systemPackages = with pkgs; [
         (olympus.override { celesteWrapper = "steam-run"; })
+        (retroarch.withCores (cores: with cores; [
+            swanstation
+        ]))
     ];
 }
