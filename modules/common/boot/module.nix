@@ -24,4 +24,5 @@ in
     };
 
     boot.extraModulePackages = mkIf needsDDCCI [ config.boot.kernelPackages.ddcci-driver ];
+    boot.supportedFilesystems = [ "nfs" ];
 }
