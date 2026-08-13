@@ -43,40 +43,20 @@
                 wrapGAppsHook3
                 gobject-introspection
 
-                wget
-
                 texinfo
                 pkg-config
                 autoconf
                 automake
                 autogen
-                copyDesktopItems
             ];
 
             buildInputs = with pkgs; [
                 pulseaudio
                 libpng
-                microfetch
-                dconf
-
                 gtk3
-                glib
                 gdk-pixbuf
                 gsettings-desktop-schemas
                 adwaita-icon-theme
-            ];
-
-            desktopItems = [
-                (pkgs.makeDesktopItem {
-                    desktopName = "XRoar";
-                    name = "xroar";
-                    exec = "xroar";
-                    icon = builtins.fetchurl "https://www.6809.org.uk/dragon/images/tinydragon.png";
-                    categories = [
-                        "Utility"
-                        "Emulator"
-                    ];
-                })
             ];
 
             configurePhase = ''
