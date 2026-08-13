@@ -45,10 +45,8 @@ in
         ];
     };
 
-    programs.fish.enable = (shell.name == "fish");
-    programs.command-not-found.enable = (shell.name != "fish");
-
-    programs.zsh.enable = (shell.name == "zsh");
+    programs.${shell.name}.enable = true;
+    programs.command-not-found.enable = false;
 
     documentation.dev.enable = true;
 }
