@@ -37,6 +37,7 @@ in
             gnumake
             cmake
             nixfmt
+            tweak
 
             man-pages
             man-pages-posix
