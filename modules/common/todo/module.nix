@@ -43,11 +43,14 @@
                 wrapGAppsHook3
                 gobject-introspection
 
+                wget
+
                 texinfo
                 pkg-config
                 autoconf
                 automake
                 autogen
+                copyDesktopItems
             ];
 
             buildInputs = with pkgs; [
@@ -63,6 +66,19 @@
                 adwaita-icon-theme
             ];
 
+            desktopItems = [
+                (pkgs.makeDesktopItem {
+                    desktopName = "XRoar";
+                    name = "xroar";
+                    exec = "xroar";
+                    icon = builtins.fetchurl "https://www.6809.org.uk/dragon/images/tinydragon.png";
+                    categories = [
+                        "Utility"
+                        "Emulator"
+                    ];
+                })
+            ];
+
             configurePhase = ''
                 ./autogen.sh
                 ./configure --prefix=$out
@@ -73,7 +89,7 @@
             '';
 
             installPhase = ''
-                make install
+                make install 
             '';
 
             meta = {
