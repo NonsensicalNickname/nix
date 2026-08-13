@@ -26,10 +26,15 @@ in
         dedicatedServer.openFirewall = true;
     };
 
-    environment.systemPackages = with pkgs; [
-        (olympus.override { celesteWrapper = "steam-run"; })
-        (retroarch.withCores (cores: with cores; [
-            swanstation
-        ]))
-    ];
+    environment.systemPackages = mkIf game (
+        with pkgs;
+        [
+            (olympus.override { celesteWrapper = "steam-run"; })
+            (retroarch.withCores (
+                cores: with cores; [
+                    swanstation
+                ]
+            ))
+        ]
+    );
 }
