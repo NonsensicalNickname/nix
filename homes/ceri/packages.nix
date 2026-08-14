@@ -22,8 +22,7 @@
         mprisence
 
         wl-clipboard
-        fastfetch
-        hyfetch
+        microfetch
         tealdeer
         syncthing
         nautilus
