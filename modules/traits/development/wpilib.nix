@@ -10,7 +10,6 @@
             datalogtool
             glass
             outlineviewer
-            pathweaver
             roborioteamnumbersetter
             robotbuilder
             shuffleboard
@@ -19,9 +18,20 @@
             wpical
             wpilib-utility
 
-            vscode-wpilib
             advantagescope
             choreo
             elastic-dashboard
         ];
+
+    programs.vscode = {
+        enable = true;
+        package = pkgs.vscodium-fhs;
+        extensions = with pkgs.vscode-extensions; [
+            wpilibsuite.vscode-wpilib
+            vscodevim.vim
+            vscjava.vscode-java-pack
+            ms-vscode.cpptools
+            mvllow.rose-pine
+        ];
+    };
 }
