@@ -50,6 +50,7 @@ in
                 { sh = "steam -silent"; }
                 { sh = "mprisence"; }
                 { sh = "fcitx5 -d"; }
+                { sh = "chameleos --stroke-color \"#00BFFF\" --stroke-width 2"; }
                 { sh = "rm -f ${wobsock} && mkfifo ${wobsock} && tail -f ${wobsock} | wob"; }
             ];
 
@@ -138,6 +139,9 @@ in
 
                 "F4".action.spawn-sh = "makoctl dismiss";
                 "Mod+D".action.spawn-sh = "fish ${scripts}/define.fish";
+
+                "Mod+Shift+D".action.spawn-sh = "chamel toggle";
+                "Mod+Shift+C".action.spawn-sh = "chamel clear";
 
                 "Mod+C".action = close-window;
                 "Mod+Shift+F".action = fullscreen-window;
