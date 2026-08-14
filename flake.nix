@@ -21,6 +21,9 @@
 
         sops-nix.url = "github:Mic92/sops-nix";
         sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+        frc-nix.url = "github:frc4451/frc-nix";
+        frc-nix.inputs.nixpkgs.follows = "nixpkgs";
     };
 
     outputs =

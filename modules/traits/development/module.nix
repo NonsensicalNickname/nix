@@ -1,6 +1,6 @@
 {
     imports = [
         ./rust.nix
-        # ./wpilib.nix
+        ./wpilib.nix
     ];
 }

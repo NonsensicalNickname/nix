@@ -1,14 +1,5 @@
 { pkgs, ... }:
 {
-    programs.vscode = {
-        enable = true;
-        package = pkgs.vscodium-fhs;
-        profiles.default.extensions = with pkgs.vscode-extensions; [
-            vscjava.vscode-java-pack
-            vscodevim.vim
-        ];
-    };
-
     programs.git = {
         enable = true;
         settings = {
