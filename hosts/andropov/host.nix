@@ -1,9 +1,4 @@
-{
-    config,
-    lib,
-    pkgs,
-    ...
-}:
+{ ... }:
 {
     imports = [ ./hardware.nix ];
     config.modules = {
@@ -13,8 +8,6 @@
             virtualbox.enable = true;
             waydroid.enable = true;
         };
-
-        containers.enabledContainers = [ "webserver" ];
 
         # TODO: trait maybe
         environment.game = {

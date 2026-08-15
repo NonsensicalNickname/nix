@@ -1,6 +1,4 @@
 {
-    config,
-    lib,
     pkgs,
     ...
 }:
@@ -9,9 +7,13 @@
     config = {
         system.stateVersion = "26.05";
 
-        modules.environment.shell = {
-            name = "zsh";
-            package = pkgs.zsh;
+        modules = {
+            environment.shell = {
+                name = "zsh";
+                package = pkgs.zsh;
+            };
+
+            containers.enabledContainers = [ "webserver" ];
         };
     };
 }
