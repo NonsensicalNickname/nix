@@ -25,7 +25,7 @@ in
         };
     };
 
-    services.resolved.enable = true;
+    services.unbound.enable = true;
 
     services.pipewire = {
         enable = true;
