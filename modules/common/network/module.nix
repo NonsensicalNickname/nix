@@ -1,14 +1,24 @@
 {
+    lib,
     pkgs,
+    config,
     ...
 }:
+let
+    dnsResolver = config.modules.network.dnsResolver;
+    inherit (lib.modules) mkIf;
+in
 {
-    networking = {
+    services.resolved = mkIf (dnsResolver == "resolved") {
+        enable = true;
+    };
+
+    networking = mkIf (dnsResolver == "unbound") {
         nameservers = [ "127.0.0.1" ];
         search = [ "local" ];
     };
 
-    services.avahi = {
+    services.avahi = mkIf (dnsResolver == "unbound") {
         enable = true;
         nssmdns4 = true;
 
@@ -19,7 +29,7 @@
         };
     };
 
-    services.unbound = {
+    services.unbound = mkIf (dnsResolver == "unbound") {
         enable = true;
         resolveLocalQueries = true;
         settings = {
