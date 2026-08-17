@@ -38,6 +38,7 @@ in
                     };
 
                     services.unbound.enable = true;
+                    services.unbound.settings.server.root-hints = "${pkgs.dns-root-data}/root.hints";
 
                     system.stateVersion = config.system.nixos.release;
                 };

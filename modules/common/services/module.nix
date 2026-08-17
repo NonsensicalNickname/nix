@@ -1,5 +1,4 @@
 {
-    pkgs,
     lib,
     config,
     ...
@@ -24,8 +23,6 @@ in
             PasswordAuthentication = true;
         };
     };
-
-    services.unbound.enable = true;
 
     services.pipewire = {
         enable = true;
