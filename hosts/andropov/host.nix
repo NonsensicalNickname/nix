@@ -20,6 +20,8 @@
             display.refreshRate = 164.955;
             display.external = true;
         };
+
+        network.dnsResolver = "unbound";
     };
 
     config.system.stateVersion = "25.11";

@@ -14,6 +14,7 @@
             };
 
             containers.enabledContainers = [ "webserver" ];
+            network.dnsResolver = "unbound";
         };
     };
 }
