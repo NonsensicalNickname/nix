@@ -66,7 +66,6 @@ in
         enable = true;
 
         settings = {
-            qname-minimisation = "yes";
             server = {
                 do-not-query-localhost = false;
                 interface = [ "127.0.0.1" ];
