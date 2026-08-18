@@ -66,6 +66,7 @@ in
         enable = true;
 
         settings = {
+            qname-minimisation = "yes";
             server = {
                 do-not-query-localhost = false;
                 interface = [ "127.0.0.1" ];
@@ -93,23 +94,5 @@ in
                 }
             ];
         };
-
-        # resolveLocalQueries = true;
-        # settings = {
-        #     server = {
-        #         verbosity = 1;
-        #         interface = [ "127.0.0.1" ];
-
-        #         domain-insecure = [ "\"local.\"" ];
-        #         private-domain = [ "\"local.\"" ];
-        #         local-zone = [ "\"local.\" refuse" ];
-
-        #         qname-minimisation = "yes";
-        #         do-ip4 = "yes";
-        #         do-udp = "yes";
-        #         do-tcp = "yes";
-        #         root-hints = "${pkgs.dns-root-data}/root.hints";
-        #     };
-        # };
     };
 }
