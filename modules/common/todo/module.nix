@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-    networking.networkmanager.enable = true;
-
     fonts = {
         packages = with pkgs; [
             nerd-fonts.jetbrains-mono
@@ -25,8 +23,6 @@
     security.rtkit.enable = true;
     security.polkit.enable = true;
     security.soteria.enable = true;
-
-    networking.firewall.enable = false;
 
     environment.systemPackages = with pkgs; [
         (stdenv.mkDerivation (finalAttrs: rec {
