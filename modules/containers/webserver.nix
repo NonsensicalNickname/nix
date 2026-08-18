@@ -1,5 +1,4 @@
 {
-    pkgs,
     lib,
     config,
     ...
@@ -14,16 +13,21 @@ in
         inherit name;
         body = {
             autoStart = true;
-            privateNetwork = true;
-            hostAddress = "192.168.100.10";
-            localAddress = "192.168.100.11";
-            hostAddress6 = "fc00::1";
-            localAddress6 = "fc00::2";
+            privateNetwork = false;
+            networking.nat = {
+                enable = true;
+                # Use "ve-*" when using nftables instead of iptables
+                internalInterfaces = [ "ve-+" ];
+                externalInterface = "ens3";
+                enableIPv6 = true;
+            };
+            # hostAddress = "192.168.100.10";
+            # localAddress = "192.168.100.11";
+            # hostAddress6 = "fc00::1";
+            # localAddress6 = "fc00::2";
             config =
                 {
                     config,
-                    pkgs,
-                    lib,
                     ...
                 }:
                 {
@@ -38,7 +42,6 @@ in
                     };
 
                     services.unbound.enable = true;
-                    services.unbound.settings.server.root-hints = "${pkgs.dns-root-data}/root.hints";
 
                     system.stateVersion = config.system.nixos.release;
                 };
