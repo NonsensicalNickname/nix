@@ -5,6 +5,7 @@
 }:
 let
     inherit (lib) mkIf;
+    secrets = config.age.secrets;
     enabledContainers = config.modules.containers.enabledContainers;
     name = "nginx";
 in
@@ -27,7 +28,7 @@ in
             {
                 services.nginx.enable = true;
                 services.nginx.virtualHosts."cdwn.gay" = {
-                    enableACME = true;
+                    useACMEHost = "cdwn.gay";
                     forceSSL = true;
                     serverAliases = [ "www.cdwn.gay" ];
                     root = "${
@@ -50,7 +51,18 @@ in
                 };
 
                 security.acme.acceptTerms = true;
-                security.acme.certs."cdwn.gay".email = "ceridwen@tutamail.com";
+                security.acme.certs."cdwn.gay" = {
+                    email = "ceridwen@tutamail.com";
+                    domain = "cdwn.gay";
+                    dnsProvider = "porkbun";
+                    dnsPropagationCheck = true;
+                    credentialFiles = {
+                        "PORKBUN_API_KEY_FILE" = secrets.porkbunAPIKey.path;
+                        "PORKBUN_SECRET_API_KEY_FILE" = secrets.porkbunAPISecretKey.path;
+                    };
+                };
+
+                users.users.nginx.extraGroups = [ "acme" ];
 
                 services.unbound.enable = true;
 

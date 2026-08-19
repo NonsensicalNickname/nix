@@ -19,8 +19,8 @@
         fenix.url = "github:nix-community/fenix";
         fenix.inputs.nixpkgs.follows = "nixpkgs";
 
-        sops-nix.url = "github:Mic92/sops-nix";
-        sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+        agenix.url = "github:ryantm/agenix";
+        agenix.inputs.nixpkgs.follows = "nixpkgs";
 
         frc-nix.url = "github:frc4451/frc-nix";
         frc-nix.inputs.nixpkgs.follows = "nixpkgs";
