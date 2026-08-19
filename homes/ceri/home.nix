@@ -5,7 +5,6 @@
         [
             niri.homeModules.niri
             nvf.homeManagerModules.default
-            sops-nix.homeManagerModules.sops
         ]
         ++ [
             ./packages.nix
