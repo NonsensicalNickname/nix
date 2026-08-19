@@ -13,7 +13,11 @@
                 package = pkgs.zsh;
             };
 
-            containers.enabledContainers = [ "webserver" ];
+            containers.enabledContainers = [
+                "webserver"
+                "nginx"
+            ];
+
             network.dnsResolver = "unbound";
         };
     };
