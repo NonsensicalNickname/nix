@@ -21,9 +21,39 @@ in
         config =
             {
                 config,
+                pkgs,
                 ...
             }:
             {
+                services.nginx.enable = true;
+                services.nginx.virtualHosts."cdwn.gay" = {
+                    enableACME = true;
+                    forceSSL = true;
+                    serverAliases = [ "www.cdwn.gay" ];
+                    root = "${
+                        (pkgs.stdenv.mkDerivation {
+                            name = "cdwn.gay";
+                            src = ./.;
+                            installPhase = ''
+                                mkdir $out && cd $out
+                                touch index.html
+                                echo "hi its me" >> index.html
+                            '';
+                        })
+                    }";
+                    locations."/robots.txt" = {
+                        extraConfig = ''
+                            rewrite ^/(.*)  $1;
+                            return 200 "User-agent: *\nDisallow: /";
+                        '';
+                    };
+                };
+
+                security.acme.acceptTerms = true;
+                security.acme.certs."cdwn.gay".email = "ceridwen@tutamail.com";
+
+                services.unbound.enable = true;
+
                 networking = {
                     firewall.allowedTCPPorts = [
                         80
@@ -47,19 +77,6 @@ in
                         ];
                     };
                 };
-
-                services.unbound.enable = true;
-
-                services.nginx.enable = true;
-                services.nginx.virtualHosts."cdwn.gay" = {
-                    enableACME = true;
-                    forceSSL = true;
-                    # root = "${}";
-                    serverAliases = [ "www.cdwn.gay" ];
-                };
-
-                security.acme.acceptTerms = true;
-                security.acme.certs."cdwn.gay".email = "ceridwen@tutamail.com";
 
                 system.stateVersion = config.system.nixos.release;
             };
