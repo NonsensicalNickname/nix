@@ -14,7 +14,6 @@
             };
 
             containers.enabledContainers = [
-                # "webserver"
                 "nginx"
             ];
 

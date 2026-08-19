@@ -42,6 +42,7 @@ in
                             '';
                         })
                     }";
+
                     locations."/robots.txt" = {
                         extraConfig = ''
                             rewrite ^/(.*)  $1;
@@ -56,6 +57,7 @@ in
                     domain = "cdwn.gay";
                     dnsProvider = "porkbun";
                     dnsPropagationCheck = true;
+
                     credentialFiles = {
                         "PORKBUN_API_KEY_FILE" = secrets.porkbunAPIKey.path;
                         "PORKBUN_SECRET_API_KEY_FILE" = secrets.porkbunAPISecretKey.path;
@@ -71,6 +73,7 @@ in
                         80
                         443
                     ];
+
                     nat = {
                         enable = true;
                         internalInterfaces = [ "ve-+" ];

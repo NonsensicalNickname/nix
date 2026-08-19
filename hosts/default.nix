@@ -82,7 +82,10 @@ in
                             extraModules = extraModules;
                             traits = traits;
                         }
-                        ++ singleton { networking.hostName = hostname; };
+                        ++ [
+                            inputs.agenix.nixosModules.default
+                            { networking.hostName = hostname; }
+                        ];
                 };
 
         in

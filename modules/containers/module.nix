@@ -7,7 +7,6 @@ let
 in
 {
     imports = [
-        ./webserver.nix
         ./nginx.nix
     ];
 
