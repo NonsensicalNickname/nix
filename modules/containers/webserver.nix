@@ -24,11 +24,6 @@ in
                 ...
             }:
             {
-                services.httpd = {
-                    enable = true;
-                    adminAddr = "ceridwen@tutamail.com";
-                };
-
                 networking = {
                     firewall.allowedTCPPorts = [ 80 ];
                     nat = {
@@ -47,6 +42,11 @@ in
                 };
 
                 services.unbound.enable = true;
+
+                services.httpd = {
+                    enable = true;
+                    adminAddr = "ceridwen@tutamail.com";
+                };
 
                 system.stateVersion = config.system.nixos.release;
             };

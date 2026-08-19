@@ -24,11 +24,6 @@ in
                 ...
             }:
             {
-                services.httpd = {
-                    enable = true;
-                    adminAddr = "ceridwen@tutamail.com";
-                };
-
                 networking = {
                     firewall.allowedTCPPorts = [
                         80
