@@ -57,12 +57,11 @@ significantly increase the download and build duration, as it will build a full 
 
    An example:
    ```nix
-            HOSTNAME = mkSystem {
+            {
                 hostname = "HOSTNAME";
-                traits = [
-                    headless
-                ];
-            };
+                traits = [ headless ];
+            }
+
    ```
 8. Make sure you are in the root of the repo and run `git add .` and then 
 `sudo nixos-rebuild switch --flake . --impure`
