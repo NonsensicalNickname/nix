@@ -1,11 +1,9 @@
 {
-    lib,
     config,
     pkgs,
     ...
 }:
 let
-    inherit (lib) mkIf;
     shell = config.modules.environment.shell;
 in
 {

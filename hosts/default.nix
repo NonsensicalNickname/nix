@@ -8,7 +8,6 @@ in
             inherit (lib.lists)
                 concatLists
                 flatten
-                singleton
                 filter
                 elem
                 ;
@@ -88,29 +87,67 @@ in
                         ];
                 };
 
+            mkSystemsWithImages =
+                systems:
+                builtins.listToAttrs (
+                    lib.flatten (
+                        map (cfg: [
+                            {
+                                name = cfg.hostname;
+                                value = mkSystem cfg;
+                            }
+                            {
+                                name = "${cfg.hostname}-iso";
+                                value =
+                                    let
+                                        prevOr = name: default: if builtins.hasAttr name cfg then cfg.${name} else default;
+                                    in
+                                    mkSystem {
+                                        inherit (cfg) hostname;
+                                        system = prevOr "system" "x86_64-linux";
+                                        traits = prevOr "traits" [ ];
+                                        extraModules = (prevOr "extraModules" [ ]) ++ [
+                                            "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+                                            {
+                                                config.modules.system = {
+                                                    users = [
+                                                        "guest"
+                                                        "ceri"
+                                                    ];
+                                                    mainUser = "guest";
+                                                };
+
+                                                config.users.users.guest.password = "guest";
+                                            }
+                                        ];
+                                    };
+                            }
+                        ]) systems
+                    )
+                );
+
         in
-        {
-            andropov = mkSystem {
+
+        mkSystemsWithImages [
+            {
                 hostname = "andropov";
                 extraModules = homes;
                 traits = [
                     graphical
                     development
                 ];
-            };
-
-            kochiyama = mkSystem {
+            }
+            {
                 hostname = "kochiyama";
                 extraModules = homes;
                 traits = [
                     graphical
                     development
                 ];
-            };
-
-            knorozov = mkSystem {
+            }
+            {
                 hostname = "knorozov";
                 traits = [ headless ];
-            };
-        };
+            }
+        ];
 }
