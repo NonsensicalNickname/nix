@@ -14,9 +14,8 @@
             ./config
         ];
 
-    config.home = {
+    home = {
         username = "ceri";
-        homeDirectory = "/home/ceri";
         stateVersion = "25.11";
 
         sessionVariables = {

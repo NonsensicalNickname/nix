@@ -100,16 +100,25 @@ in
                                 name = "${cfg.hostname}-iso";
                                 value =
                                     let
-                                        prev_modules = if builtins.hasAttr "extraModules" cfg then cfg.extraModules else [ ];
-                                        prev_traits = if builtins.hasAttr "traits" cfg then cfg.traits else [ ];
-                                        prev_system = if builtins.hasAttr "system" cfg then cfg.system else "x86_64-linux";
+                                        prevOr = name: default: if builtins.hasAttr name cfg then cfg.${name} else default;
                                     in
                                     mkSystem {
                                         inherit (cfg) hostname;
-                                        system = prev_system;
-                                        traits = prev_traits;
-                                        extraModules = prev_modules ++ [
+                                        system = prevOr "system" "x86_64-linux";
+                                        traits = prevOr "traits" [ ];
+                                        extraModules = (prevOr "extraModules" [ ]) ++ [
                                             "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+                                            {
+                                                config.modules.system = {
+                                                    users = [
+                                                        "guest"
+                                                        "ceri"
+                                                    ];
+                                                    mainUser = "guest";
+                                                };
+
+                                                config.users.users.guest.password = "guest";
+                                            }
                                         ];
                                     };
                             }
@@ -118,6 +127,7 @@ in
                 );
 
         in
+
         mkSystemsWithImages [
             {
                 hostname = "andropov";
@@ -127,7 +137,6 @@ in
                     development
                 ];
             }
-
             {
                 hostname = "kochiyama";
                 extraModules = homes;
@@ -136,7 +145,6 @@ in
                     development
                 ];
             }
-
             {
                 hostname = "knorozov";
                 traits = [ headless ];

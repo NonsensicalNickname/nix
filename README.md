@@ -12,7 +12,13 @@ Currently configured machines are andropov, kochiyama, and knorozov (see above f
 
 ## Installation
 
-### Build an iso 
+### Testing an Existing Configuration (Use this for convenience)
+
+This repo provides iso files for existing configurations. See releases for isos, and test them
+in a VM such as VirtualBox - knorozov is a minimal system, whilst andropov is a full desktop system.
+The main user in any config image is called `guest`, with the password `guest`.
+
+### Build an Image
 
 Instructions on how to build an iso for testing out one of the host configurations in this repo.
 

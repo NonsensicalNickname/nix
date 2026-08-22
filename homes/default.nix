@@ -12,7 +12,7 @@ let
     inherit (config) modules;
 
     configured = modules;
-    flakeroot = builtins.toString ../.;
+    flakeroot = toString ../.;
 
     specialArgs = {
         inherit
