@@ -12,6 +12,16 @@ Currently configured machines are andropov, kochiyama, and knorozov (see above f
 
 ## Installation
 
+### Build an iso 
+
+Instructions on how to build an iso for testing out one of the host configurations in this repo.
+
+0. Clone this repo and `cd` into it
+1. Pick a host or create a new one (detailed in the manual installation instructions). Use this name in place of HOSTNAME below.
+2. Run `nix build .#nixosConfigurations.HOSTNAME-iso.config.system.build.isoImage -o iso`
+
+### Manual
+
 0. Follow the installation guide on the [NixOS wiki](https://wiki.nixos.org/wiki/NixOS_Installation_Guide/en) to install NixOS from the minimal ISO.
 Continue with these steps once you are able to boot into a working installation. Make sure that you have git and a text editor such as vim installed.
 1. Clone this repo and `cd` into it

@@ -8,7 +8,6 @@ in
             inherit (lib.lists)
                 concatLists
                 flatten
-                singleton
                 filter
                 elem
                 ;
@@ -88,29 +87,59 @@ in
                         ];
                 };
 
+            mkSystemsWithImages =
+                systems:
+                builtins.listToAttrs (
+                    lib.flatten (
+                        map (cfg: [
+                            {
+                                name = cfg.hostname;
+                                value = mkSystem cfg;
+                            }
+                            {
+                                name = "${cfg.hostname}-iso";
+                                value =
+                                    let
+                                        prev_modules = if builtins.hasAttr "extraModules" cfg then cfg.extraModules else [ ];
+                                        prev_traits = if builtins.hasAttr "traits" cfg then cfg.traits else [ ];
+                                        prev_system = if builtins.hasAttr "system" cfg then cfg.system else "x86_64-linux";
+                                    in
+                                    mkSystem {
+                                        inherit (cfg) hostname;
+                                        system = prev_system;
+                                        traits = prev_traits;
+                                        extraModules = prev_modules ++ [
+                                            "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+                                        ];
+                                    };
+                            }
+                        ]) systems
+                    )
+                );
+
         in
-        {
-            andropov = mkSystem {
+        mkSystemsWithImages [
+            {
                 hostname = "andropov";
                 extraModules = homes;
                 traits = [
                     graphical
                     development
                 ];
-            };
+            }
 
-            kochiyama = mkSystem {
+            {
                 hostname = "kochiyama";
                 extraModules = homes;
                 traits = [
                     graphical
                     development
                 ];
-            };
+            }
 
-            knorozov = mkSystem {
+            {
                 hostname = "knorozov";
                 traits = [ headless ];
-            };
-        };
+            }
+        ];
 }
