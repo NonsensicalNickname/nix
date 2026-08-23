@@ -11,8 +11,8 @@
         };
 
         containers.enabledContainers = [
-            "nginx"
-            "continuwuity"
+            "web"
+            # "continuwuity"
         ];
 
         network.dnsResolver = "unbound";

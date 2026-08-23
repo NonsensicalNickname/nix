@@ -7,7 +7,7 @@ let
 in
 {
     imports = [
-        ./nginx.nix
+        ./web.nix
         ./continuwuity.nix
     ];
 

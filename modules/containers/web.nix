@@ -7,7 +7,7 @@ let
     inherit (lib) mkIf;
     secrets = config.age.secrets;
     enabledContainers = config.modules.containers.enabledContainers;
-    name = "nginx";
+    name = "web";
 in
 {
     containers.${name} = mkIf (builtins.elem name enabledContainers) {
