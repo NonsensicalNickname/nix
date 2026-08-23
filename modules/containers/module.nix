@@ -8,6 +8,7 @@ in
 {
     imports = [
         ./nginx.nix
+        ./continuwuity.nix
     ];
 
     # networking.nftables.enable = true;

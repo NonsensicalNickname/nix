@@ -22,6 +22,9 @@
         agenix.url = "github:ryantm/agenix";
         agenix.inputs.nixpkgs.follows = "nixpkgs";
 
+        continuwuity.url = "git+https://forgejo.ellis.link/continuwuation/continuwuity";
+        continuwuity.inputs.nixpkgs.follows = "nixpkgs";
+
         frc-nix.url = "github:frc4451/frc-nix";
         frc-nix.inputs.nixpkgs.follows = "nixpkgs";
     };

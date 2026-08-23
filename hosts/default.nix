@@ -15,6 +15,7 @@ in
             inherit (lib.filesystem) listFilesRecursive;
 
             hm = inputs.home-manager.nixosModules.home-manager;
+            continuwuity = inputs.continuwuity.packages."x86_64-linux".default;
 
             # Modules
             root = ../modules;
@@ -131,23 +132,24 @@ in
         mkSystemsWithImages [
             {
                 hostname = "andropov";
-                extraModules = homes;
                 traits = [
                     graphical
                     development
                 ];
+                extraModules = homes;
             }
             {
                 hostname = "kochiyama";
-                extraModules = homes;
                 traits = [
                     graphical
                     development
                 ];
+                extraModules = homes;
             }
             {
                 hostname = "knorozov";
                 traits = [ headless ];
+                # extraModules = [ continuwuity ];
             }
         ];
 }

@@ -12,6 +12,7 @@
 
         containers.enabledContainers = [
             "nginx"
+            "continuwuity"
         ];
 
         network.dnsResolver = "unbound";
