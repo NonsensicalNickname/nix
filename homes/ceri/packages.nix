@@ -30,7 +30,6 @@
         ascii
         file
         cloc
-        # mpv
         imv
         zathura
         yt-dlp
@@ -38,6 +37,7 @@
         brightnessctl
         xwayland-satellite
         jq
+        (mpv.override { scripts = [ mpvScripts.mpris ]; })
 
         drawterm-wayland
 
@@ -65,6 +65,7 @@
         tageditor
         parsec-bin
         schismtracker
+        xroar
 
         # TUI apps
         wiremix
@@ -76,7 +77,6 @@
         tiny
 
         # PL
-
         factor-lang
         typst
         jdk17
@@ -92,8 +92,6 @@
         valgrind
         gdb
         glslviewer
-
-        (mpv.override { scripts = [ mpvScripts.mpris ]; })
 
         # Future reference for building from a Cargo project
         # (mprisence.override {
