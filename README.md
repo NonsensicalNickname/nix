@@ -36,7 +36,7 @@ Continue with these steps once you are able to boot into a working installation.
 4. In hosts/HOSTNAME, create hardware.nix and host.nix
 5. Populate hardware.nix by running 
 `nixos-generate-config --show-hardware-config >> hosts/HOSTNAME/hardware.nix`
-6. Populate hosts.nix. See the other hosts for examples, or use this as a base:
+6. Populate host.nix. See the other hosts for examples, or use this as a base:
     ```nix
         { pkgs, ... }:
         {
