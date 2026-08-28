@@ -19,6 +19,7 @@ in
         shellAliases = {
             v = "nvim";
             m = "math";
+            cal = "cal && echo && date";
 
             nrs = "nh os switch --impure";
             nfu = "sudo nix flake update";

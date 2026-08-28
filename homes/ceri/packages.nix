@@ -56,6 +56,7 @@
         chromium
         slack
         qutebrowser
+        retroshare
         krita
         pwvucontrol
         fluffychat

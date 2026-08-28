@@ -70,6 +70,13 @@
                 definedAliases = [ "@mp" ];
                 iconMapObj."16" = "https://man.archlinux.org/favicon.ico";
             };
+
+            google = {
+                name = "Google";
+                urls = [ { template = "https://www.google.com/search?q={searchTerms}"; } ];
+                definedAliases = [ "@g" ];
+                iconMapObj."16" = "https://www.google.com/favicon.ico";
+            };
         };
     };
 }
