@@ -78,6 +78,7 @@
 
         # PL
         factor-lang
+        isabelle
         typst
         jdk17
         python3
