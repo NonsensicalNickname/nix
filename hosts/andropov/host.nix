@@ -5,7 +5,7 @@
         style.rgb.enable = true;
 
         environment.virtualisation = {
-            virtualbox.enable = true;
+            virt-manager.enable = true;
             waydroid.enable = true;
         };
 

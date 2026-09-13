@@ -6,21 +6,16 @@
 }:
 let
     inherit (lib.modules) mkIf;
-    virt = config.modules.environment.virtualisation;
-    virtualbox = virt.virtualbox.enable;
-    waydroid = virt.waydroid.enable;
+
+    inherit (config.modules.environment.virtualisation) waydroid virt-manager;
 in
 {
-    virtualisation.virtualbox = mkIf virtualbox {
-        host.enable = true;
-        host.enableKvm = true;
-        host.addNetworkInterface = false;
-    };
-
-    users.extraGroups.vboxusers.members = mkIf virtualbox [ "ceri" ];
-
-    virtualisation.waydroid = mkIf waydroid {
+    virtualisation.waydroid = mkIf waydroid.enable {
         enable = true;
         package = pkgs.waydroid-nftables;
     };
+
+    virtualisation.libvirtd.enable = virt-manager.enable;
+    programs.virt-manager.enable = virt-manager.enable;
+    users.users.ceri.extraGroups = mkIf virt-manager.enable [ "libvirtd" ];
 }

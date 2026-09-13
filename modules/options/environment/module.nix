@@ -17,8 +17,8 @@ in
         };
 
         virtualisation = {
-            virtualbox = {
-                enable = mkEnableOption "virtualbox";
+            virt-manager = {
+                enable = mkEnableOption "virt-manager";
             };
             waydroid = {
                 enable = mkEnableOption "waydroid";
