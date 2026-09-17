@@ -84,6 +84,7 @@
         python3
         mlton
         ghc
+        ormolu
         zig
         haskellPackages.hoogle
         haskell-language-server
