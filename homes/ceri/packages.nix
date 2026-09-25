@@ -18,6 +18,7 @@
         mpc
         hyprpicker
         file
+        sox
         mpris-scrobbler
         mprisence
 
