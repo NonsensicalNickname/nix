@@ -53,6 +53,7 @@
         r2modman
 
         # GUI other
+        google-chrome
         angryipscanner
         chromium
         slack
