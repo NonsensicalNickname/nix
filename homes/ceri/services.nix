@@ -32,6 +32,12 @@ in
                 type "pipewire"
                 name "pipedwire"
             }
+            audio_output {
+               type   "fifo"
+               name   "cava"
+               path   "/tmp/mpd.fifo"
+               format "44100:16:2"
+            }
         '';
     };
 

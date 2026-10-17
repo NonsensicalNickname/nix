@@ -3,7 +3,7 @@
         ./niri.nix
         ./foot.nix
         ./fish.nix
-        ./rmpc.nix
+        ./rmpc
         ./librewolf
         ./nvf
     ];
