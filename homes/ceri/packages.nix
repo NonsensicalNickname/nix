@@ -80,7 +80,7 @@
 
         # PL
         factor-lang
-        isabelle
+        # isabelle
         typst
         jdk17
         python3

@@ -1,7 +1,12 @@
-{ configured, flakeroot, ... }:
+{
+    configured,
+    flakeroot,
+    ...
+}:
 let
     displayName = configured.device.display.name;
-    walls = "${flakeroot}/res/walls";
+    user = configured.system.mainUser;
+    walls = "/home/${user}/.config/wpaperd/walls";
 in
 {
     services.mako = {
@@ -26,7 +31,7 @@ in
 
     services.mpd = {
         enable = true;
-        musicDirectory = "/home/ceri/Music/";
+        musicDirectory = "/home/${configured.system.mainUser}/Music/";
         extraConfig = ''
             audio_output {
                 type "pipewire"
@@ -42,6 +47,12 @@ in
     };
 
     services.mpd-mpris.enable = true;
+
+    # Maybe this source should use a fetcher
+    xdg.configFile."wpaperd/walls/rpm-squares.png" = {
+        enable = true;
+        source = "${flakeroot}/res/walls/rpm-squares.png";
+    };
 
     services.wpaperd.enable = true;
     services.wpaperd.settings.${displayName}.path = builtins.toPath "${walls}/rpm-squares.png";
