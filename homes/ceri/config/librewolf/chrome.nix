@@ -1,4 +1,10 @@
-{ flakeroot, ... }:
+{
+    configured,
+    ...
+}:
+let
+    walls = "/home/${configured.system.mainUser}/.config/wpaperd/walls";
+in
 {
     programs.librewolf.profiles."default".userChrome = ''
         #browser vbox#appcontent tabbrowser, 
@@ -24,7 +30,7 @@
                 position: fixed ;
                 top: 0 ;
                 left: 0 ;
-                background: #f9a no-repeat url(${flakeroot}/res/walls/rpm-lines.png) center ;
+                background: #f9a no-repeat url(${walls}/rpm-lines.png) center ;
                 background-size: cover ;
                 width: 100vw ;
                 height: 100vh ;

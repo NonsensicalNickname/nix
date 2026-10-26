@@ -49,9 +49,15 @@ in
     services.mpd-mpris.enable = true;
 
     # Maybe this source should use a fetcher
+    # Put these somewhere else soon?
     xdg.configFile."wpaperd/walls/rpm-squares.png" = {
         enable = true;
         source = "${flakeroot}/res/walls/rpm-squares.png";
+    };
+
+    xdg.configFile."wpaperd/walls/rpm-lines.png" = {
+        enable = true;
+        source = "${flakeroot}/res/walls/rpm-lines.png";
     };
 
     services.wpaperd.enable = true;
