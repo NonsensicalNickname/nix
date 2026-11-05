@@ -9,12 +9,17 @@
         "flakes"
     ];
 
-    nixpkgs.config.permittedInsecurePackages = [
-        "librewolf-bin-151.0.1-2"
-        "pnpm-10.29.2"
-        "librewolf-bin-unwrapped-151.0.1-2"
-        "electron-40.10.5"
-    ];
+    nixpkgs.config = {
+        permittedInsecurePackages = [
+            "librewolf-bin-151.0.1-2"
+            "pnpm-10.29.2"
+            "librewolf-bin-unwrapped-151.0.1-2"
+            "electron-40.10.5"
+        ];
+        problems.handlers = {
+            "gtk+".broken = "warn"; 
+        };
+    };
 
     environment.sessionVariables.NH_FLAKE = "$HOME/.config/nix";
 

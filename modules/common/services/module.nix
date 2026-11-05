@@ -1,6 +1,7 @@
 {
     lib,
     config,
+    pkgs,
     ...
 }:
 let
@@ -32,4 +33,15 @@ in
     };
 
     services.pcscd.enable = true;
+
+    services.udev = {
+        packages = with pkgs; [
+            qmk
+            qmk-udev-rules
+            qmk_hid
+            via
+            vial
+        ];
+    };
+    hardware.keyboard.qmk.enable = true;
 }

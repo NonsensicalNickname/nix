@@ -41,6 +41,9 @@ in
             man-pages-posix
 
             shell.package
+            vial
+            qmk
+            via
         ];
     };
 

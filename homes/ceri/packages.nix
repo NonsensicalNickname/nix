@@ -90,7 +90,7 @@
         zig
         haskellPackages.hoogle
         haskell-language-server
-        gforth
+        # gforth
 
         # PL utils
         valgrind

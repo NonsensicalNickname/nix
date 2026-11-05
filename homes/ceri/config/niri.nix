@@ -79,7 +79,7 @@ in
 
             binds = with config.lib.niri.actions; {
                 "Mod+Q".action.spawn = "foot";
-                "Mod+Z".action.spawn = "fuzzel";
+                "Mod+X".action.spawn = "fuzzel";
                 "Mod+B".action.spawn = "librewolf";
 
                 "XF86AudioMute".action.spawn-sh =
