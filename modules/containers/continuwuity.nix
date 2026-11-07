@@ -12,17 +12,11 @@ in
 {
     containers.${name} = mkIf (builtins.elem name enabledContainers) {
         autoStart = true;
-        privateNetwork = true;
-
-        hostAddress = "192.168.100.20";
-        localAddress = "192.168.100.21";
-        hostAddress6 = "fc00::3";
-        localAddress6 = "fc00::4";
+        privateNetwork = false;
 
         config =
             {
                 config,
-                pkgs,
                 ...
             }:
             {
@@ -30,96 +24,50 @@ in
                     enable = true;
                     settings = {
                         global = {
-                            server_name = "cdwn.gay";
-                            # Listening on localhost by default
-                            # address and port are handled automatically
-                            allow_registration = false;
+                            server_name = "matrix.cdwn.gay";
+                            allow_registration = true;
+                            registration_token = "543ut43utw%$#%^$5"; # TODO secret
                             allow_encryption = true;
                             allow_federation = true;
-                            trusted_servers = [ "matrix.org" ];
+                            allow_room_creation = false;
+                            trusted_servers = [ "matrix.org" ]; # TODO expand
+                            address = [
+                                "0.0.0.0"
+                                "::1"
+                            ];
+                            new_user_displayname_suffix = "";
+                            well_known = {
+                                server = "matrix.cdwn.gay:443";
+                            };
+
+                            # TODO section
+                            auto_join_rooms = [ ];
+                            admins_list = [ "@ceridwen:matrix.cdwn.gay" ];
                         };
                     };
                 };
 
-                services.nginx.enable = true;
-                services.nginx.virtualHosts."cdwn.gay" = {
-                    useACMEHost = "cdwn.gay";
-                    forceSSL = true;
-                    serverAliases = [ "www.cdwn.gay" ];
-
-                    locations."/_matrix/" = {
-                        extraConfig = ''
-                            proxy_pass http://127.0.0.1:6167$request_uri;
-                            proxy_set_header Host $host;
-                            proxy_set_header X-Real-IP $remote_addr;
-                            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                            proxy_set_header X-Forwarded-Proto $scheme;
-                        '';
-                    };
-
-                    listen = [
-                        {
-                            addr = "127.0.0.1";
-                            port = 443;
-                            ssl = true;
+                services.caddy = {
+                    enable = true;
+                    virtualHosts."matrix.cdwn.gay".extraConfig = ''
+                        reverse_proxy 0.0.0.0:6167
+                    '';
+                    virtualHosts."cdwn.gay".extraConfig = ''
+                        handle_path /.well-known/matrix/server {
+                            respond {"m.server":"matrix.cdwn.gay:443"}
                         }
-                        {
-                            addr = "127.0.0.1";
-                            port = 8448;
-                            ssl = true;
-                        }
-                    ];
+                    '';
                 };
 
-                security.acme.acceptTerms = true;
-                security.acme.certs."cdwn.gay" = {
-                    email = "ceridwen@tutamail.com";
-                    domain = "cdwn.gay";
-                    dnsProvider = "porkbun";
-                    dnsPropagationCheck = true;
-
-                    credentialFiles = {
-                        "PORKBUN_API_KEY_FILE" = secrets.porkbunAPIKey.path;
-                        "PORKBUN_SECRET_API_KEY_FILE" = secrets.porkbunAPISecretKey.path;
-                    };
-                };
-
-                users.users.nginx.extraGroups = [ "acme" ];
+                networking.firewall.allowedTCPPorts = [
+                    80
+                    443
+                    8448
+                ];
 
                 services.unbound.enable = true;
 
                 system.stateVersion = config.system.nixos.release;
             };
     };
-
-    networking = {
-        firewall.allowedTCPPorts = [
-            80
-            443
-            8448
-        ];
-
-        nat = {
-            enable = true;
-            internalInterfaces = [ "ve-+" ];
-            externalInterface = "ens3";
-            enableIPv6 = true;
-
-            forwardPorts = [
-                {
-                    destination = "127.0.0.1:80";
-                    sourcePort = 80;
-                }
-                {
-                    destination = "127.0.0.1:443";
-                    sourcePort = 443;
-                }
-                {
-                    destination = "127.0.0.1:8448";
-                    sourcePort = 8448;
-                }
-            ];
-        };
-    };
-
 }
