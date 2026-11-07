@@ -60,7 +60,7 @@
         qutebrowser
         krita
         pwvucontrol
-        fluffychat
+        iamb
         nicotine-plus
         vesktop
         keepassxc
