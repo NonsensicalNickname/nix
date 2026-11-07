@@ -14,11 +14,6 @@ in
         autoStart = true;
         privateNetwork = false;
 
-        hostAddress = "192.168.100.20";
-        localAddress = "192.168.100.21";
-        hostAddress6 = "fc00::3";
-        localAddress6 = "fc00::4";
-
         config =
             {
                 config,
@@ -67,31 +62,6 @@ in
                 users.users.nginx.extraGroups = [ "acme" ];
 
                 services.unbound.enable = true;
-
-                networking = {
-                    firewall.allowedTCPPorts = [
-                        80
-                        443
-                    ];
-
-                    nat = {
-                        enable = true;
-                        internalInterfaces = [ "ve-+" ];
-                        externalInterface = "ens3";
-                        enableIPv6 = true;
-
-                        forwardPorts = [
-                            {
-                                destination = "192.168.100.21:80";
-                                sourcePort = 80;
-                            }
-                            {
-                                destination = "192.168.100.21:443";
-                                sourcePort = 443;
-                            }
-                        ];
-                    };
-                };
 
                 system.stateVersion = config.system.nixos.release;
             };

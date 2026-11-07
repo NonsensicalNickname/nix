@@ -17,7 +17,7 @@
             "electron-40.10.5"
         ];
         problems.handlers = {
-            "gtk+".broken = "warn"; 
+            "gtk+".broken = "warn";
         };
     };
 
