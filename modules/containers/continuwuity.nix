@@ -1,6 +1,7 @@
 {
     lib,
     config,
+    pkgs,
     ...
 }:
 let
@@ -48,11 +49,24 @@ in
                     };
                 };
 
-                networking.firewall.allowedTCPPorts = [
-                    6167
-                ];
+                networking = {
+                    firewall.allowedTCPPorts = [
+                        6167
+                    ];
 
-                services.unbound.enable = true;
+                    useHostResolvConf = lib.mkForce false;
+                    nameservers = [ "10.100.0.1" ];
+
+                    defaultGateway = {
+                        address = "10.100.0.1";
+                        interface = "eth0";
+                    };
+                };
+
+                environment.systemPackages = [
+                    pkgs.tcpdump
+                    pkgs.dig
+                ];
 
                 system.stateVersion = config.system.nixos.release;
             };

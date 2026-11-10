@@ -69,27 +69,24 @@ in
         settings = {
             server = {
                 do-not-query-localhost = false;
-                interface = [ "127.0.0.1" ];
+                interface = [
+                    "127.0.0.1"
+                    "10.100.0.1"
+                ];
                 port = 53;
-                access-control = [ "127.0.0.0/32 allow" ];
+                access-control = [
+                    "127.0.0.0/32 allow"
+                    "10.100.0.0/24  allow"
+                ];
                 module-config = ''"validator iterator"'';
             };
             forward-zone = [
                 {
                     name = ".";
-                    forward-tls-upstream = true;
+                    forward-tls-upstream = false;
+
                     forward-addr = [
                         "127.0.0.1@5300"
-                        "9.9.9.9"
-
-                        "1.1.1.1@853#cloudflare-dns.com"
-                        "2606:4700:4700::1111@853#cloudflare-dns.com"
-                        "1.0.0.1@853#cloudflare-dns.com"
-                        "2606:4700:4700::1001@853#cloudflare-dns.com"
-                        "8.8.8.8@853#dns.google"
-                        "2001:4860:4860::8888@853#dns.google"
-                        "8.8.4.4@853#dns.google"
-                        "2001:4860:4860::8844@853#dns.google"
                     ];
                 }
             ];

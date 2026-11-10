@@ -32,8 +32,6 @@ in
                     80
                 ];
 
-                services.unbound.enable = true;
-
                 system.stateVersion = config.system.nixos.release;
             };
     };

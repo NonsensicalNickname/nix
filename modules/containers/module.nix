@@ -11,7 +11,7 @@ in
         ./continuwuity.nix
     ];
 
-    # networking.nftables.enable = true;
+    networking.nftables.enable = true;
     networking.bridges.br-containers.interfaces = [ ];
 
     networking.interfaces.br-containers.ipv4.addresses = [
@@ -20,6 +20,17 @@ in
             prefixLength = 24;
         }
     ];
+
+    networking.firewall.interfaces.br-containers = {
+        allowedUDPPorts = [ 53 ];
+        allowedTCPPorts = [ 53 ];
+    };
+
+    networking.nat = {
+        enable = true;
+        internalInterfaces = [ "br-containers" ];
+        externalInterface = "enp0s31f6";
+    };
 
     services.caddy = {
         enable = true;
