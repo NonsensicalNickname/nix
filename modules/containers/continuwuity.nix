@@ -12,7 +12,10 @@ in
 {
     containers.${name} = mkIf (builtins.elem name enabledContainers) {
         autoStart = true;
-        privateNetwork = false;
+        privateNetwork = true;
+
+        hostBridge = "br-containers";
+        localAddress = "10.100.0.2/24";
 
         config =
             {
@@ -31,11 +34,9 @@ in
                             allow_federation = true;
                             allow_room_creation = false;
                             trusted_servers = [ "matrix.org" ]; # TODO expand
-                            address = [
-                                "0.0.0.0"
-                                "::1"
-                            ];
+                            address = [ "0.0.0.0" ];
                             new_user_displayname_suffix = "";
+
                             well_known = {
                                 server = "matrix.cdwn.gay:443";
                             };
@@ -47,22 +48,8 @@ in
                     };
                 };
 
-                services.caddy = {
-                    enable = true;
-                    virtualHosts."matrix.cdwn.gay".extraConfig = ''
-                        reverse_proxy 0.0.0.0:6167
-                    '';
-                    virtualHosts."cdwn.gay".extraConfig = ''
-                        handle_path /.well-known/matrix/server {
-                            respond {"m.server":"matrix.cdwn.gay:443"}
-                        }
-                    '';
-                };
-
                 networking.firewall.allowedTCPPorts = [
-                    80
-                    443
-                    8448
+                    6167
                 ];
 
                 services.unbound.enable = true;
