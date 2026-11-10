@@ -21,6 +21,7 @@ in
                 "tty"
                 "dialout"
                 "uucp"
+                "pipewire"
             ];
         };
 

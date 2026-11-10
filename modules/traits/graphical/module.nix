@@ -55,6 +55,7 @@ in
             accent = "mauve";
         })
 
+        pkgs.mumble
         pkgs.chameleos
         pkgs.wob
         patched-pkgs.sable-desktop
