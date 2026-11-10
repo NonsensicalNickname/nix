@@ -1,4 +1,23 @@
-{ pkgs, ... }:
+{
+    lib,
+    pkgs,
+    ...
+}:
+let
+    patched-pkgs =
+        let
+            patched-nixpkgs = pkgs.applyPatches {
+                src = pkgs.path;
+                patches = lib.singleton (
+                    pkgs.fetchpatch {
+                        url = "https://github.com/NixOS/nixpkgs/pull/573087.diff";
+                        hash = "sha256-xKHQwVpt73iHZMHkR0Z0Mb/oy7lm6PfhkXUZ6rV96sg=";
+                    }
+                );
+            };
+        in
+        import patched-nixpkgs { inherit (pkgs) config; };
+in
 {
     xdg.portal = {
         config.common = {
@@ -30,13 +49,14 @@
         theme = "catppuccin-macchiato-mauve";
     };
 
-    environment.systemPackages = with pkgs; [
-        (catppuccin-sddm.override {
+    environment.systemPackages = [
+        (pkgs.catppuccin-sddm.override {
             flavor = "macchiato";
             accent = "mauve";
         })
 
-        chameleos
-        wob
+        pkgs.chameleos
+        pkgs.wob
+        patched-pkgs.sable-desktop
     ];
 }

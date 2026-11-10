@@ -20,7 +20,7 @@
         file
         sox
         mpris-scrobbler
-        mprisence
+        # mprisence
 
         wl-clipboard
         microfetch
@@ -46,7 +46,6 @@
 
         # GUI game
         quake3e
-        owmods-cli
         heroic
         prismlauncher
         gale
@@ -72,7 +71,7 @@
         # TUI apps
         wiremix
         bulletty
-        presenterm
+        # presenterm
         wikiman
         gdu
         yazi

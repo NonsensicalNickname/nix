@@ -43,7 +43,7 @@
             clang.enable = true;
             glsl.enable = true;
             python.enable = true;
-            assembly.enable = true;
+            # assembly.enable = true;
             markdown.enable = true;
             typst.enable = true;
             typst.lsp.servers = [ "tinymist" ];

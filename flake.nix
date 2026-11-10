@@ -2,7 +2,7 @@
     description = "gay little system";
 
     inputs = {
-        nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+        nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
 
         flake-parts.url = "github:hercules-ci/flake-parts";
         flake-parts.inputs.nixpkgs.follows = "nixpkgs";

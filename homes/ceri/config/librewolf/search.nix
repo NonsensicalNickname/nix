@@ -77,6 +77,13 @@
                 definedAliases = [ "@g" ];
                 iconMapObj."16" = "https://www.google.com/favicon.ico";
             };
+
+            sep = {
+                name = "Stanford Encyclopedia of Philosophy";
+                urls = [ { template = "https://plato.stanford.edu/search/search?query={searchTerms}"; } ];
+                definedAliases = [ "@sep" ];
+                iconMapObj."16" = "https://plato.stanford.edu/favicon.ico";
+            };
         };
     };
 }
