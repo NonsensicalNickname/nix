@@ -7,7 +7,7 @@ let
 in
 {
     imports = [
-        ./nginx.nix
+        ./httpd.nix
         ./continuwuity.nix
     ];
 
@@ -30,6 +30,10 @@ in
             handle_path /.well-known/matrix/server {
                 respond {"m.server":"matrix.cdwn.gay:443"}
             }
+        '';
+
+        virtualHosts."cdwn.gay".extraConfig = ''
+            reverse_proxy 10.100.0.3:80
         '';
     };
 
