@@ -14,7 +14,7 @@ in
     networking = mkMerge [
         {
             networkmanager.enable = true;
-            firewall.enable = false;
+            firewall.enable = true;
         }
         (mkIf useUnbound {
             nameservers = [ "127.0.0.1" ];
