@@ -13,6 +13,7 @@
         containers.enabledContainers = [
             "continuwuity"
             "httpd"
+            "murmur"
         ];
 
         network.dnsResolver = "unbound";

@@ -63,11 +63,6 @@ in
                     };
                 };
 
-                environment.systemPackages = [
-                    pkgs.tcpdump
-                    pkgs.dig
-                ];
-
                 system.stateVersion = config.system.nixos.release;
             };
     };

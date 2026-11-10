@@ -9,6 +9,7 @@ in
     imports = [
         ./httpd.nix
         ./continuwuity.nix
+        ./murmur.nix
     ];
 
     networking.nftables.enable = true;
@@ -30,6 +31,19 @@ in
         enable = true;
         internalInterfaces = [ "br-containers" ];
         externalInterface = "enp0s31f6";
+
+        forwardPorts = [
+            {
+                sourcePort = 64738;
+                destination = "10.100.0.4:64738";
+                proto = "tcp";
+            }
+            {
+                sourcePort = 64738;
+                destination = "10.100.0.4:64738";
+                proto = "udp";
+            }
+        ];
     };
 
     services.caddy = {
@@ -51,7 +65,12 @@ in
     networking.firewall.allowedTCPPorts = [
         80
         443
-        8448
+        8448 # matrix
+        64738 # murmur
+    ];
+
+    networking.firewall.allowedUDPPorts = [
+        64738 # murmur
     ];
 
     boot.enableContainers = cfg.enable;
