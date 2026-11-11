@@ -22,6 +22,17 @@ in
         }
     ];
 
+    networking.firewall.allowedTCPPorts = [
+        80
+        443
+        8448 # matrix
+        64738 # murmur
+    ];
+
+    networking.firewall.allowedUDPPorts = [
+        64738 # murmur
+    ];
+
     networking.firewall.interfaces.br-containers = {
         allowedUDPPorts = [ 53 ];
         allowedTCPPorts = [ 53 ];
@@ -46,32 +57,50 @@ in
         ];
     };
 
-    services.caddy = {
+    services.nginx = {
         enable = true;
+        recommendedProxySettings = true;
+        recommendedTlsSettings = true;
+        clientMaxBodySize = "20m";
 
-        virtualHosts."matrix.cdwn.gay".extraConfig = ''
-            reverse_proxy 10.100.0.2:6167
+        virtualHosts = {
+            "cdwn.gay" = {
+                forceSSL = true;
+                enableACME = true;
 
-            handle_path /.well-known/matrix/server {
-                respond {"m.server":"matrix.cdwn.gay:443"}
-            }
-        '';
+                locations."/" = {
+                    proxyPass = "http://10.100.0.3:80";
+                };
+            };
 
-        virtualHosts."cdwn.gay".extraConfig = ''
-            reverse_proxy 10.100.0.3:80
-        '';
+            "matrix.cdwn.gay" = {
+                forceSSL = true;
+                useACMEHost = "cdwn.gay";
+
+                locations."/" = {
+                    proxyPass = "http://10.100.0.2:6167$request_uri";
+                };
+
+                locations."/.well-known/matrix/server" = {
+                    extraConfig = ''
+                        return 200 '{"m.server":"matrix.cdwn.gay:443"}';
+                    '';
+                };
+            };
+        };
     };
 
-    networking.firewall.allowedTCPPorts = [
-        80
-        443
-        8448 # matrix
-        64738 # murmur
-    ];
-
-    networking.firewall.allowedUDPPorts = [
-        64738 # murmur
-    ];
+    security.acme = {
+        acceptTerms = true;
+        certs."cdwn.gay" = {
+            email = "ceridwen@tutamail.com";
+            group = config.services.nginx.group;
+            extraDomainNames = [
+                "matrix.cdwn.gay"
+                "barking.cdwn.gay"
+            ];
+        };
+    };
 
     boot.enableContainers = cfg.enable;
 }
