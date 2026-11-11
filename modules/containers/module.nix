@@ -22,20 +22,25 @@ in
         }
     ];
 
-    networking.firewall.allowedTCPPorts = [
-        80
-        443
-        8448 # matrix
-        64738 # murmur
-    ];
+    networking.firewall = {
+        allowedTCPPorts = [
+            80
+            443
+            8448 # matrix
+            64738 # murmur
+            7880
+            7881
+        ];
 
-    networking.firewall.allowedUDPPorts = [
-        64738 # murmur
-    ];
+        allowedUDPPorts = [
+            64738 # murmur
+            7882
+        ];
 
-    networking.firewall.interfaces.br-containers = {
-        allowedUDPPorts = [ 53 ];
-        allowedTCPPorts = [ 53 ];
+        interfaces.br-containers = {
+            allowedUDPPorts = [ 53 ];
+            allowedTCPPorts = [ 53 ];
+        };
     };
 
     networking.nat = {
@@ -52,6 +57,16 @@ in
             {
                 sourcePort = 64738;
                 destination = "10.100.0.4:64738";
+                proto = "udp";
+            }
+            {
+                sourcePort = 7881;
+                destination = "10.100.0.2:7881";
+                proto = "tcp";
+            }
+            {
+                sourcePort = 7882;
+                destination = "10.100.0.2:7882";
                 proto = "udp";
             }
         ];
@@ -77,14 +92,62 @@ in
                 forceSSL = true;
                 useACMEHost = "cdwn.gay";
 
-                locations."/" = {
-                    proxyPass = "http://10.100.0.2:6167$request_uri";
-                };
+                locations = {
+                    "/" = {
+                        proxyPass = "http://10.100.0.2:6167$request_uri";
+                    };
 
-                locations."/.well-known/matrix/server" = {
-                    extraConfig = ''
-                        return 200 '{"m.server":"matrix.cdwn.gay:443"}';
-                    '';
+                    "/.well-known/matrix/server" = {
+                        extraConfig = ''
+                            default_type application/json;
+                            return 200 '{"m.server":"matrix.cdwn.gay:443"}';
+                        '';
+                    };
+
+                    "/.well-known/matrix/client" = {
+                        extraConfig = ''
+                            default_type application/json;
+                            return 200 '
+                                {
+                                    "m.homeserver": {
+                                        "base_url": "https://matrix.cdwn.gay"
+                                    },
+                                    "m.identity_server": {
+                                        "base_url": "https://matrix.cdwn.gay"
+                                    },
+                                    "org.matrix.msc3575.proxy": {
+                                        "url": "https://matrix.cdwn.gay"
+                                    },
+                                    "org.matrix.msc4143.rtc_foci": [
+                                        {
+                                            "type": "livekit",    "livekit_service_url": "https://matrix.cdwn.gay/livekit/jwt"
+                                        }
+                                    ]
+                                } 
+                            ';
+                        '';
+                    };
+
+                    "^~ /livekit/jwt/" = {
+                        priority = 400;
+                        proxyPass = "http://10.100.0.2:${toString config.services.lk-jwt-service.port}/";
+                    };
+
+                    "^~ /livekit/sfu/" = {
+                        extraConfig = ''
+                            proxy_send_timeout 120;
+                            proxy_read_timeout 120;
+                            proxy_buffering off;
+
+                            proxy_set_header Accept-Encoding gzip;
+                            proxy_set_header Upgrade $http_upgrade;
+                            proxy_set_header Connection "upgrade";
+                        '';
+
+                        priority = 400;
+                        proxyPass = "http://10.100.0.2:${toString config.services.livekit.settings.port}/";
+                        proxyWebsockets = true;
+                    };
                 };
             };
         };
